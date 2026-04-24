@@ -1,292 +1,199 @@
 <template>
-  <section class="leaderboard-page" aria-labelledby="leaderboard-title">
-    <div class="cinema-overlay"></div>
-
+  <section class="leaderboard-page">
     <div class="container">
-      <div class="page-head">
-        <h1 id="leaderboard-title" class="page-title">Leaderboard</h1>
-        <p class="page-sub">Your best quiz sessions & personal records</p>
-        <div class="divider">❖ ❖ ❖</div>
+      <h1>Leaderboard</h1>
+      <p class="subtitle">Your saved game sessions</p>
+
+      <!-- Clear Button (only if there are scores) -->
+      <button 
+        v-if="leaderboard.length > 0"
+        class="clear-btn" 
+        @click="clearLeaderboard"
+      >
+        Clear Leaderboard
+      </button>
+
+      <!-- NO SAVED GAMES -->
+      <div v-if="leaderboard.length === 0" class="empty-state">
+        <p>No saved games yet.</p>
+        <p>Play a Classic mode game and click "End Game & Save Score"</p>
       </div>
 
-      <!-- Sort Controls -->
-      <div class="sort-controls">
-        <button
-          class="sort-btn"
-          :class="{ active: sortKey === 'score' }"
-          @click="setSort('score')"
+      <!-- SAVED GAMES LIST -->
+      <div v-else class="leaderboard-list">
+        <div 
+          v-for="(entry, index) in leaderboard" 
+          :key="index" 
+          class="leaderboard-card"
         >
-          Highest Score
-        </button>
-        <button
-          class="sort-btn"
-          :class="{ active: sortKey === 'timeSpent' }"
-          @click="setSort('timeSpent')"
-        >
-          Time Spent
-        </button>
-        <button
-          class="sort-btn"
-          :class="{ active: sortKey === 'date' }"
-          @click="setSort('date')"
-        >
-          Latest Session
-        </button>
+          <div class="rank">#{{ index + 1 }}</div>
+          <div class="info">
+            <div class="mode-badge">{{ entry.mode }} • {{ entry.difficulty }}</div>
+            <div class="score">Score: {{ entry.score }}</div>
+            <div class="streak">Best Streak: {{ entry.bestStreak }}</div>
+            <div class="date">{{ formatDate(entry.date) }}</div>
+          </div>
+        </div>
       </div>
 
-      <!-- No Data Fallback -->
-      <div v-if="sortedEntries.length === 0" class="empty-state">
-        <p>No game sessions found.<br>Play a game to save your first score.</p>
-      </div>
-
-      <!-- Leaderboard Table -->
-      <div v-else class="table-wrapper">
-        <table class="leader-table" aria-label="Game session scores ranking">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Mode</th>
-              <th>Difficulty</th>
-              <th>Score</th>
-              <th>Streak</th>
-              <th>Time</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(entry, idx) in sortedEntries" :key="entry.sessionId">
-              <td class="rank">{{ idx + 1 }}</td>
-              <td>{{ formatMode(entry.mode) }}</td>
-              <td>{{ formatDiff(entry.difficulty) }}</td>
-              <td class="highlight">{{ entry.score }}</td>
-              <td>{{ entry.streak }}</td>
-              <td>{{ formatTime(entry.timeSpent) }}</td>
-              <td>{{ formatDate(entry.date) }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <button class="back-btn" @click="goBack">
+        Back to Menu
+      </button>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import type { LeaderboardEntry } from '@/types'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
-// Sort state
-const sortKey = ref<'score' | 'timeSpent' | 'date'>('score')
+const router = useRouter()
+const leaderboard = ref<any[]>([])
 
-// Raw entries from localStorage
-const entries = ref<LeaderboardEntry[]>([])
-
-// Load saved leaderboard on mount
+// LOAD SAVED SCORES ON PAGE LOAD
 onMounted(() => {
-  const raw = localStorage.getItem('movie-quiz-leaderboard')
-  if (raw) entries.value = JSON.parse(raw)
-})
-
-// Sorting logic
-const setSort = (key: typeof sortKey.value) => {
-  sortKey.value = key
-}
-
-const sortedEntries = computed(() => {
-  const list = [...entries.value]
-  switch (sortKey.value) {
-    case 'score':
-      return list.sort((a, b) => b.score - a.score)
-    case 'timeSpent':
-      return list.sort((a, b) => a.timeSpent - b.timeSpent)
-    case 'date':
-      return list.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    default:
-      return list
+  const saved = localStorage.getItem('leaderboard')
+  if (saved) {
+    leaderboard.value = JSON.parse(saved)
+    // Sort by highest score FIRST
+    leaderboard.value.sort((a, b) => b.score - a.score)
   }
 })
 
-// ===== Formatters (i18n ready later) =====
-const formatMode = (mode: string) => {
-  const map: Record<string, string> = {
-    classic: 'Classic',
-    'beat-the-clock': 'Beat The Clock',
-    'longest-streak': 'Longest Streak',
-    investigation: 'Investigation'
+// FORMAT DATE FOR DISPLAY
+const formatDate = (isoString: string) => {
+  return new Date(isoString).toLocaleString()
+}
+
+// GO BACK TO MENU
+const goBack = () => {
+  router.push('/')
+}
+
+// 🔥 CLEAR LEADERBOARD (with confirmation)
+const clearLeaderboard = () => {
+  if (confirm('Are you sure you want to clear ALL scores? This cannot be undone.')) {
+    localStorage.removeItem('leaderboard')
+    leaderboard.value = []
   }
-  return map[mode] || mode
-}
-
-const formatDiff = (diff: string) => {
-  const map: Record<string, string> = {
-    easy: 'Easy',
-    medium: 'Medium',
-    hard: 'Hard',
-    master: 'Master'
-  }
-  return map[diff] || diff
-}
-
-const formatTime = (seconds: number) => {
-  const m = Math.floor(seconds / 60)
-  const s = seconds % 60
-  return `${m}m ${s}s`
-}
-
-const formatDate = (iso: string) => {
-  return new Date(iso).toLocaleDateString()
 }
 </script>
 
 <style scoped lang="scss">
 .leaderboard-page {
-  min-height: calc(100vh - 70px);
-  padding: 3rem 1.2rem;
-  position: relative;
+  min-height: 100vh;
+  padding: 4rem 2rem;
   background: var(--bg-primary);
-}
-
-.cinema-overlay {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(207, 168, 88, 0.06) 1px, transparent 1px);
-  background-size: 30px 30px;
-  animation: slowPan 30s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes slowPan {
-  0% { background-position: 0 0; }
-  100% { background-position: 100% 100%; }
+  color: var(--text-primary);
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 800px;
   margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-.page-head {
   text-align: center;
-  margin-bottom: 3rem;
 }
 
-.page-title {
-  font-size: clamp(2rem, 5vw, 3rem);
-  color: var(--text-primary);
-  letter-spacing: 0.15em;
-  margin-bottom: 0.6rem;
-}
-
-.page-sub {
-  color: var(--text-secondary);
-  font-size: 1rem;
-}
-
-.divider {
+h1 {
+  font-size: 2.5rem;
   color: var(--cinema-gold);
-  opacity: 0.6;
-  margin: 1.8rem 0;
-  letter-spacing: 0.6em;
+  margin-bottom: 0.5rem;
 }
 
-/* Sort Buttons */
-.sort-controls {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 2.5rem;
+.subtitle {
+  opacity: 0.7;
+  margin-bottom: 1rem;
 }
 
-.sort-btn {
+// ✅ Clear Button Style
+.clear-btn {
+  background: #e53e3e;
+  color: white;
+  border: none;
   padding: 0.6rem 1.4rem;
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
-  border-radius: 2px;
+  border-radius: 8px;
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    border-color: rgba(207, 168, 88, 0.4);
-    color: var(--text-primary);
-  }
-
-  &.active {
-    background: var(--cinema-gold);
-    color: #000;
-    border-color: var(--cinema-gold);
-  }
+  margin-bottom: 2rem;
+  transition: 0.2s;
+}
+.clear-btn:hover {
+  background: #c53030;
 }
 
-/* Empty state */
 .empty-state {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: var(--text-secondary);
-  font-size: 1.05rem;
-  line-height: 1.7;
+  padding: 3rem 1rem;
+  opacity: 0.5;
+  line-height: 1.6;
 }
 
-/* Table */
-.table-wrapper {
-  overflow-x: auto;
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.leader-table {
-  width: 100%;
-  border-collapse: collapse;
-  color: var(--text-primary);
+.leaderboard-card {
   background: var(--bg-secondary);
-}
-
-.leader-table thead {
-  border-bottom: 1px solid var(--border-color);
-}
-
-.leader-table th {
-  padding: 1.1rem 0.8rem;
-  color: var(--cinema-gold);
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
   text-align: left;
-  white-space: nowrap;
-}
-
-.leader-table td {
-  padding: 1rem 0.8rem;
-  border-bottom: 1px solid var(--border-color);
-  color: var(--text-secondary);
-}
-
-.leader-table tr:hover td {
-  background: rgba(207, 168, 88, 0.05);
 }
 
 .rank {
+  font-size: 1.5rem;
+  font-weight: bold;
   color: var(--cinema-gold);
-  font-weight: 600;
+  min-width: 50px;
 }
 
-.highlight {
-  color: var(--cinema-gold);
-  font-weight: 600;
+.info {
+  flex: 1;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .leader-table th,
-  .leader-table td {
-    padding: 0.8rem 0.5rem;
-    font-size: 0.9rem;
-  }
+.mode-badge {
+  background: #444;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-bottom: 0.5rem;
 }
 
-/* Ultra wide cinema screens */
-@media (min-width: 1920px) {
-  .container {
-    max-width: 1600px;
-  }
+.score {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+}
+
+.streak {
+  opacity: 0.8;
+  margin: 0.2rem 0;
+}
+
+.date {
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.back-btn {
+  background: var(--cinema-gold);
+  color: black;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
 }
 </style>

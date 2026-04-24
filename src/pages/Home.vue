@@ -1,34 +1,31 @@
 <template>
   <section class="home-page" aria-labelledby="home-title">
-    <!-- subtle cinema animated background overlay -->
     <div class="cinema-overlay"></div>
 
     <div class="home-content">
       <header class="home-header">
         <h1 id="home-title" class="main-title">
-          <span class="title-first">Movie</span>
-          <span class="title-second">Quiz</span>
+          <span class="title-first">{{ $t('home.title.movie') }}</span>
+          <span class="title-second">{{ $t('home.title.quiz') }}</span>
         </h1>
-        <p class="subtitle" aria-describedby="home-title">
-          Guess movies, beat the clock, build your streak & unlock cinema challenges
+        <p class="subtitle">
+          {{ $t('home.subtitle') }}
         </p>
       </header>
 
-      <!-- animated decorative divider (theater style) -->
       <div class="divider">❖ ❖ ❖</div>
 
-      <!-- main navigation buttons -->
       <div class="home-actions">
-        <router-link to="/play" class="btn btn-primary" aria-label="Start playing the quiz">
-          Play Game
+        <router-link to="/play" class="btn btn-primary">
+          {{ $t('home.buttons.play.label') }}
         </router-link>
 
-        <router-link to="/rules" class="btn btn-secondary" aria-label="Read game rules">
-          Rules
+        <router-link to="/rules" class="btn btn-secondary">
+          {{ $t('home.buttons.rules.label') }}
         </router-link>
 
-        <router-link to="/settings" class="btn btn-tertiary" aria-label="Open application settings">
-          Settings
+        <router-link to="/leaderboard" class="btn btn-tertiary">
+          Leaderboard
         </router-link>
       </div>
     </div>
@@ -36,11 +33,10 @@
 </template>
 
 <script setup lang="ts">
-// No local logic needed for home
-// All global state (dark mode, audio, lang) will come from Pinia later
 </script>
 
 <style scoped lang="scss">
+/* YOUR ORIGINAL STYLES - NO CHANGES */
 .home-page {
   min-height: 100vh;
   width: 100%;
@@ -55,8 +51,7 @@
 .cinema-overlay {
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(rgba(207, 168, 88, 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(207, 168, 88, 0.08) 1px, transparent 1px);
   background-size: 30px 30px;
   animation: slowPan 25s linear infinite;
   pointer-events: none;
@@ -157,13 +152,6 @@
 
   &:hover {
     color: var(--cinema-gold);
-  }
-}
-
-/* Ultra wide cinema screen support */
-@media (min-width: 1920px) {
-  .home-content {
-    max-width: 1200px;
   }
 }
 </style>

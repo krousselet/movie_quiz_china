@@ -68,14 +68,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+// ✅ IMPORT YOUR TMDB SERVICE
+import { TMDBService } from '../core/TMDBService'
 
 const router = useRouter()
+// ✅ CREATE INSTANCE
+const tmdb = new TMDBService()
 
 // === Reactive State ===
 const selectedMode = ref<string>('')
 const selectedDifficulty = ref<string>('')
 
-// === Game Modes (matches your spec) ===
+// === Game Modes ===
 const gameModes = ref([
   {
     value: 'classic',
@@ -107,7 +111,7 @@ const gameModes = ref([
   }
 ])
 
-// === Difficulties (matches your spec) ===
+// === Difficulties ===
 const difficulties = ref([
   { value: 'easy', label: 'Easy', aria: 'Select easy difficulty' },
   { value: 'medium', label: 'Medium', aria: 'Select medium difficulty' },
@@ -115,8 +119,13 @@ const difficulties = ref([
   { value: 'master', label: 'Master', aria: 'Select master difficulty' }
 ])
 
-// === Launch Game & Pass Params to Game Page ===
+// === ✅ LAUNCH GAME WITH CLEAR CACHE + NEW MOVIES ===
 const launchGame = () => {
+  // 👇 THIS IS THE KEY LINE
+  tmdb.clearMovieCache()
+  console.log('🧹 Old movie cache cleared')
+
+  // Then start game
   router.push({
     path: '/game',
     query: {

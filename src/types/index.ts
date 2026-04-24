@@ -9,6 +9,14 @@ export interface Movie {
   poster_path: string
 }
 
+export interface Movie {
+  id: number;
+  title: string;
+  originalTitle: string;
+  displayTitle: string;
+  poster_path: string;
+}
+
 export interface GameSession {
   id: string
   mode: GameMode

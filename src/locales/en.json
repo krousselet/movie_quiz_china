@@ -1,0 +1,23 @@
+{
+  "home": {
+    "title": {
+      "movie": "Movie",
+      "quiz": "Quiz"
+    },
+    "subtitle": "Guess movies, beat the clock, build your streak & unlock cinema challenges",
+    "buttons": {
+      "play": {
+        "label": "Play Game",
+        "aria": "Start playing the quiz"
+      },
+      "rules": {
+        "label": "Rules",
+        "aria": "Read game rules"
+      },
+      "settings": {
+        "label": "Settings",
+        "aria": "Open application settings"
+      }
+    }
+  }
+}

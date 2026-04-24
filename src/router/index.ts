@@ -13,5 +13,7 @@ const routes: RouteRecordRaw[] = [
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-  scrollBehavior: () => ({ top: 0 }), // SEO optimization
+    scrollBehavior() {
+    return { top: 0 }
+  }
 })
