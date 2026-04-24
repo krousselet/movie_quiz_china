@@ -1,0 +1,41 @@
+@import "./transition.scss";
+
+/* Light Mode (default) */
+html {
+  --bg-primary: #f8f5f0;
+  --bg-secondary: #ffffff;
+  --text-primary: #1a1518;
+  --text-secondary: #444444;
+  --cinema-gold: #cfa858;
+  --cinema-red: #7b1010;
+  --border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode (triggered by class="dark") */
+html.dark {
+  --bg-primary: #0f0f14;
+  --bg-secondary: #1c1c26;
+  --text-primary: #f0e9e0;
+  --text-secondary: #b9b2a9;
+  --border-color: rgba(207, 168, 88, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100vh;
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Segoe UI', serif;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+input, button, select, textarea {
+  font-family: inherit;
+  color: inherit;
+}
