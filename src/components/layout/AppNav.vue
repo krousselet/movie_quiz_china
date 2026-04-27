@@ -62,7 +62,7 @@ const navItems = ref([
   { path: '/play', label: 'Play' },
   { path: '/leaderboard', label: 'Leaderboard' },
   { path: '/rules', label: 'Rules' },
-  { path: '/settings', label: 'Settings' }
+  { path: '/settings', label: 'Settings' },
 ])
 </script>
 
@@ -118,11 +118,11 @@ const navItems = ref([
   transition: color 0.3s ease;
 
   &:hover {
-    color: var(--cinema-gold);
+    color: gold;
   }
 
   &.active {
-    color: var(gold);
+    color: gold;
 
     &::after {
       content: '';
