@@ -1,143 +1,222 @@
 <template>
-  <section class="rules-page" aria-labelledby="rules-title">
+  <section class="rules-page">
     <div class="cinema-overlay"></div>
-
     <div class="rules-container">
       <div class="page-heading">
-        <h1 id="rules-title" class="main-heading">Game Rules</h1>
-        <p class="sub-heading">Understand every mode, difficulty and joker</p>
+        <h1 class="main-heading">{{ $t('rules.pageTitle') }}</h1>
+        <p class="sub-heading">{{ $t('rules.subTitle') }}</p>
         <div class="divider">❖ ❖ ❖</div>
       </div>
 
       <!-- Classic Mode -->
       <div class="rule-block">
-        <h2 class="rule-title">🎬 Classic Mode</h2>
+        <h2 class="rule-title">🎬 {{ $t('rules.classic.title') }}</h2>
         <div class="rule-content">
-          <p>Play at your own rhythm with no timer or pressure.</p>
+          <p>{{ $t('rules.classic.desc') }}</p>
           <ul>
-            <li>Guess movie titles from posters</li>
-            <li>No time limit</li>
-            <li>No forced difficulty</li>
-            <li>Use the <strong>End Session</strong> button to save your stats</li>
+            <li>{{ $t('rules.classic.point1') }}</li>
+            <li>{{ $t('rules.classic.point2') }}</li>
+            <li>{{ $t('rules.classic.point3') }}</li>
+            <li>{{ $t('rules.classic.point4') }}</li>
           </ul>
         </div>
       </div>
 
       <!-- Beat The Clock -->
       <div class="rule-block">
-        <h2 class="rule-title">⏱️ Beat The Clock</h2>
+        <h2 class="rule-title">⏱️ {{ $t('rules.beatClock.title') }}</h2>
         <div class="rule-content">
-          <p>Race against the timer to reach a fixed number of movies in 5 minutes.</p>
+          <p>{{ $t('rules.beatClock.desc', { min: GAME_CONFIG.modes.beatTheClock.timeLimit }) }}</p>
           <ul>
-            <li><strong>Easy</strong> : 5 movies in 5 minutes</li>
-            <li><strong>Medium</strong> : 10 movies in 5 minutes</li>
-            <li><strong>Hard</strong> : 15 movies in 5 minutes</li>
-            <li><strong>Master</strong> : 20 movies in 5 minutes</li>
+            <li>
+              {{
+                $t('rules.beatClock.diffLine', {
+                  diff: $t('rules.beatClock.diffLabel.easy'),
+                  count: GAME_CONFIG.modes.beatTheClock.difficulties.easy,
+                  min: GAME_CONFIG.modes.beatTheClock.timeLimit,
+                })
+              }}
+            </li>
+            <li>
+              {{
+                $t('rules.beatClock.diffLine', {
+                  diff: $t('rules.beatClock.diffLabel.medium'),
+                  count: GAME_CONFIG.modes.beatTheClock.difficulties.medium,
+                  min: GAME_CONFIG.modes.beatTheClock.timeLimit,
+                })
+              }}
+            </li>
+            <li>
+              {{
+                $t('rules.beatClock.diffLine', {
+                  diff: $t('rules.beatClock.diffLabel.hard'),
+                  count: GAME_CONFIG.modes.beatTheClock.difficulties.hard,
+                  min: GAME_CONFIG.modes.beatTheClock.timeLimit,
+                })
+              }}
+            </li>
+            <li>
+              {{
+                $t('rules.beatClock.diffLine', {
+                  diff: $t('rules.beatClock.diffLabel.master'),
+                  count: GAME_CONFIG.modes.beatTheClock.difficulties.master,
+                  min: GAME_CONFIG.modes.beatTheClock.timeLimit,
+                })
+              }}
+            </li>
           </ul>
         </div>
       </div>
 
       <!-- Longest Streak -->
       <div class="rule-block">
-        <h2 class="rule-title">🔥 Longest Streak</h2>
+        <h2 class="rule-title">🔥 {{ $t('rules.streak.title') }}</h2>
         <div class="rule-content">
-          <p>Chain correct answers in a row to complete the challenge.</p>
+          <p>{{ $t('rules.streak.desc') }}</p>
           <ul>
-            <li><strong>Easy</strong> : Reach a streak of 5 correct movies</li>
-            <li><strong>Medium</strong> : Win 2 pairs in a row</li>
-            <li><strong>Hard</strong> : Win 3 pairs in a row</li>
-            <li><strong>Master</strong> : Discover all pairs without mistake</li>
+            <li>
+              {{
+                $t('rules.streak.lines.easy', {
+                  count: GAME_CONFIG.modes.longestStreak.difficulties.easy,
+                })
+              }}
+            </li>
+            <li>{{ $t('rules.streak.lines.medium') }}</li>
+            <li>{{ $t('rules.streak.lines.hard') }}</li>
+            <li>{{ $t('rules.streak.lines.master') }}</li>
           </ul>
         </div>
       </div>
 
       <!-- Investigation Mode -->
       <div class="rule-block">
-        <h2 class="rule-title">🔍 Investigation Mode</h2>
+        <h2 class="rule-title">🔍 {{ $t('rules.investigation.title') }}</h2>
         <div class="rule-content">
-          <p>The poster is blurred. Answer questions to reveal details.</p>
+          <p>{{ $t('rules.investigation.desc') }}</p>
           <ul>
-            <li>Correct answers = unblur the poster</li>
-            <li>Wrong answers = re-blur parts of the image</li>
-            <li><strong>Easy</strong> : 3 questions</li>
-            <li><strong>Medium</strong> : 5 questions</li>
-            <li><strong>Hard</strong> : 7 questions</li>
-            <li><strong>Master</strong> : 10 questions</li>
+            <li>{{ $t('rules.investigation.mech1') }}</li>
+            <li>{{ $t('rules.investigation.mech2') }}</li>
+            <li>
+              {{
+                $t('rules.investigation.diffLine', {
+                  diff: $t('rules.beatClock.diffLabel.easy'),
+                  count: GAME_CONFIG.modes.investigation.difficulties.easy,
+                })
+              }}
+            </li>
+            <li>
+              {{
+                $t('rules.investigation.diffLine', {
+                  diff: $t('rules.beatClock.diffLabel.medium'),
+                  count: GAME_CONFIG.modes.investigation.difficulties.medium,
+                })
+              }}
+            </li>
+            <li>
+              {{
+                $t('rules.investigation.diffLine', {
+                  diff: $t('rules.beatClock.diffLabel.hard'),
+                  count: GAME_CONFIG.modes.investigation.difficulties.hard,
+                })
+              }}
+            </li>
+            <li>
+              {{
+                $t('rules.investigation.diffLine', {
+                  diff: $t('rules.beatClock.diffLabel.master'),
+                  count: GAME_CONFIG.modes.investigation.difficulties.master,
+                })
+              }}
+            </li>
           </ul>
-          <p class="text-muted"><em>This mode will be implemented last.</em></p>
+          <p class="text-muted">
+            <em>{{ $t('rules.investigation.note') }}</em>
+          </p>
         </div>
       </div>
 
-      <!-- Jokers System -->
+      <!-- Jokers -->
       <div class="rule-block">
-        <h2 class="rule-title">🃏 Jokers System</h2>
+        <h2 class="rule-title">🃏 {{ $t('rules.jokers.title') }}</h2>
         <div class="rule-content">
-          <p>Each game mode has <strong>3 unique jokers</strong>, usable only once per session.</p>
+          <p>{{ $t('rules.jokers.desc') }}</p>
 
-          <h3>Beat The Clock Jokers</h3>
+          <h3>{{ $t('rules.jokers.btcTitle') }}</h3>
           <ul>
-            <li>Skip a movie</li>
-            <li>Pause the timer for 10 seconds</li>
-            <li>Add 15 seconds to the timer</li>
-            <li>Reveal one letter of the title</li>
+            <li>{{ $t('rules.jokers.btcSkip') }}</li>
+            <li>
+              {{
+                $t('rules.jokers.btcPause', {
+                  secPause: GAME_CONFIG.modes.beatTheClock.jokerPauseSec,
+                })
+              }}
+            </li>
+            <li>
+              {{
+                $t('rules.jokers.btcAdd', { secAdd: GAME_CONFIG.modes.beatTheClock.jokerTimeAdd })
+              }}
+            </li>
+            <li>{{ $t('rules.jokers.btcReveal') }}</li>
           </ul>
 
-          <h3>Longest Streak Jokers</h3>
+          <h3>{{ $t('rules.jokers.streakTitle') }}</h3>
           <ul>
-            <li>Allow one mistake without breaking streak</li>
-            <li>Skip the current movie</li>
-            <li>Reveal one letter</li>
+            <li>{{ $t('rules.jokers.str1') }}</li>
+            <li>{{ $t('rules.jokers.str2') }}</li>
+            <li>{{ $t('rules.jokers.str3') }}</li>
           </ul>
 
-          <h3>Investigation Jokers</h3>
+          <h3>{{ $t('rules.jokers.investTitle') }}</h3>
           <ul>
-            <li>Reveal one letter</li>
-            <li>Get a hint for a question</li>
-            <li>Get the correct answer for one question</li>
+            <li>{{ $t('rules.jokers.inv1') }}</li>
+            <li>{{ $t('rules.jokers.inv2') }}</li>
+            <li>{{ $t('rules.jokers.inv3') }}</li>
           </ul>
         </div>
       </div>
 
-      <!-- Global Session Rules -->
+      <!-- Stats -->
       <div class="rule-block">
-        <h2 class="rule-title">📊 Session & Statistics</h2>
-        <div class="rule-content">
-          <ul>
-            <li>Every session saves your score, streak, attempts and time</li>
-            <li>All data is stored locally in your browser</li>
-            <li>Leaderboard sorts results by score, time or date</li>
-            <li>You can skip a movie if you cannot find the answer</li>
-          </ul>
-        </div>
+        <h2 class="rule-title">📊 {{ $t('rules.stats.title') }}</h2>
+        <ul>
+          <li>{{ $t('rules.stats.s1') }}</li>
+          <li>{{ $t('rules.stats.s2') }}</li>
+          <li>{{ $t('rules.stats.s3') }}</li>
+          <li>{{ $t('rules.stats.s4') }}</li>
+        </ul>
       </div>
 
-      <!-- Accessibility & Settings -->
+      <!-- Accessibility -->
       <div class="rule-block">
-        <h2 class="rule-title">♿ Accessibility & Settings</h2>
-        <div class="rule-content">
-          <ul>
-            <li>Dark / Light mode toggle</li>
-            <li>Font size & font style customization</li>
-            <li>Background music toggle</li>
-            <li>Full screen reader and keyboard navigation support</li>
-            <li>Deaf & visually impaired friendly design</li>
-          </ul>
-        </div>
+        <h2 class="rule-title">♿ {{ $t('rules.accessibility.title') }}</h2>
+        <ul>
+          <li>{{ $t('rules.accessibility.a1') }}</li>
+          <li>{{ $t('rules.accessibility.a2') }}</li>
+          <li>{{ $t('rules.accessibility.a3') }}</li>
+          <li>{{ $t('rules.accessibility.a4') }}</li>
+          <li>{{ $t('rules.accessibility.a5') }}</li>
+        </ul>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-// No logic needed, static informative page
+import { GAME_CONFIG } from '@/config/gameRules'
 </script>
 
 <style scoped lang="scss">
 .rules-page {
-  min-height: calc(100vh - 70px);
-  padding: 3rem 1.2rem;
+  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 1rem 0.8rem;
+  margin: 0;
   position: relative;
   background: var(--bg-primary);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .cinema-overlay {
@@ -150,98 +229,74 @@
 }
 
 @keyframes slowPan {
-  0% { background-position: 0 0; }
-  100% { background-position: 100% 100%; }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
 }
 
 .rules-container {
+  width: 100%;
   max-width: 1100px;
-  margin: 0 auto;
+  height: 100%;
   position: relative;
   z-index: 2;
+  overflow-y: auto;
+  padding-right: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .page-heading {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 0.5rem;
 }
 
 .main-heading {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
   color: var(--text-primary);
   letter-spacing: 0.15em;
-  margin-bottom: 0.6rem;
+  margin: 0 0 0.4rem;
 }
 
 .sub-heading {
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  margin: 0;
 }
 
 .divider {
   color: var(--cinema-gold);
   opacity: 0.6;
-  margin: 1.8rem 0;
+  margin: 1rem 0;
   letter-spacing: 0.6em;
+  font-size: 0.9rem;
 }
 
-/* Rule Block Styling — theatre card style */
 .rule-block {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 4px;
-  padding: 1.6rem 2rem;
-  margin-bottom: 2rem;
+  border-radius: 6px;
+  padding: 1rem 1.4rem;
   transition: border 0.3s ease;
-
-  &:hover {
-    border-color: rgba(207, 168, 88, 0.25);
-  }
 }
 
 .rule-title {
   color: var(--cinema-gold);
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  letter-spacing: 0.08em;
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  margin: 0 0 0.6rem;
 }
 
 .rule-content {
   color: var(--text-secondary);
-  line-height: 1.7;
-
-  h3 {
-    color: var(--text-primary);
-    margin: 1rem 0 0.5rem;
-    font-size: 1.05rem;
-  }
-
-  ul {
-    padding-left: 1.4rem;
-    margin-bottom: 0.8rem;
-  }
-
-  strong {
-    color: var(--cinema-gold);
-  }
+  line-height: 1.6;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
 }
 
 .text-muted {
   opacity: 0.7;
-  font-size: 0.9rem;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .rule-block {
-    padding: 1.2rem 1rem;
-  }
-}
-
-/* Ultra wide cinema screens */
-@media (min-width: 1920px) {
-  .rules-container {
-    max-width: 1300px;
-  }
 }
 </style>

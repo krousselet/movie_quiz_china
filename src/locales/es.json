@@ -1,0 +1,109 @@
+{
+  "home": {
+    "title": {
+      "movie": "Película",
+      "quiz": "Cuestionario"
+    },
+    "subtitle": "Adivina películas, contrarreloj, crea tu racha y desbloquea desafíos de cine",
+    "buttons": {
+      "play": {
+        "label": "Jugar",
+        "aria": "Empezar el cuestionario"
+      },
+      "rules": {
+        "label": "Reglas",
+        "aria": "Leer las reglas del juego"
+      },
+      "settings": {
+        "label": "Ajustes",
+        "aria": "Abrir configuración"
+      }
+    }
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Seleccionar idioma",
+    "music": "Música de fondo",
+    "darkMode": "Modo oscuro",
+    "fontSize": "Tamaño de fuente",
+    "small": "Pequeña",
+    "normal": "Normal",
+    "large": "Grande"
+  },
+  "common": {
+    "back": "Volver"
+  },
+  "rules": {
+    "pageTitle": "Reglas del juego",
+    "subTitle": "Conoce cada modo, dificultad y comodín",
+    "classic": {
+      "title": "Modo Clásico",
+      "desc": "Juega a tu ritmo sin temporizador ni presión.",
+      "point1": "Adivina títulos de películas desde carteles",
+      "point2": "Sin límite de tiempo",
+      "point3": "Sin dificultad forzada",
+      "point4": "Usa el botón Finalizar sesión para guardar estadísticas"
+    },
+    "beatClock": {
+      "title": "Contrarreloj",
+      "desc": "Compite contra el tiempo para adivinar {count} películas en {min} minutos.",
+      "diffLabel": {
+        "easy": "Fácil",
+        "medium": "Medio",
+        "hard": "Difícil",
+        "master": "Maestro"
+      },
+      "diffLine": "{diff}: {count} películas en {min} minutos"
+    },
+    "streak": {
+      "title": "Racha de aciertos",
+      "desc": "Encadena respuestas correctas para completar el reto.",
+      "lines": {
+        "easy": "Alcanza una racha de {count} aciertos",
+        "medium": "Consigue 2 aciertos seguidos",
+        "hard": "Consigue 3 aciertos seguidos",
+        "master": "Acierta todo sin errores"
+      }
+    },
+    "investigation": {
+      "title": "Modo Investigación",
+      "desc": "El cartel está borroso. Responde preguntas para revelar detalles.",
+      "mech1": "Respuestas correctas = desdifuminar imagen",
+      "mech2": "Respuestas incorrectas = difuminar partes",
+      "diffLine": "{diff}: {count} preguntas",
+      "note": "Este modo se implementará al final."
+    },
+    "jokers": {
+      "title": "Sistema de comodines",
+      "desc": "Cada modo tiene 3 comodines únicos, usables una vez por sesión.",
+      "btcTitle": "Comodines Contrarreloj",
+      "streakTitle": "Comodines Racha",
+      "investTitle": "Comodines Investigación",
+      "btcSkip": "Saltar película",
+      "btcPause": "Pausar temporizador {secPause} segundos",
+      "btcAdd": "Añadir {secAdd} segundos al reloj",
+      "btcReveal": "Revelar una letra del título",
+      "str1": "Permitir un error sin romper la racha",
+      "str2": "Saltar la película actual",
+      "str3": "Revelar una letra",
+      "inv1": "Revelar una letra",
+      "inv2": "Obtener una pista",
+      "inv3": "Ver la respuesta correcta"
+    },
+    "stats": {
+      "title": "Sesión y estadísticas",
+      "s1": "Se guardan puntuación, racha, intentos y tiempo",
+      "s2": "Datos almacenados localmente en el navegador",
+      "s3": "Clasificación por puntuación, tiempo o fecha",
+      "s4": "Salta una película si no sabes la respuesta"
+    },
+    "accessibility": {
+      "title": "Accesibilidad y ajustes",
+      "a1": "Cambiar modo claro/oscuro",
+      "a2": "Personalizar tamaño y estilo de fuente",
+      "a3": "Activar/desactivar música de fondo",
+      "a4": "Lector de pantalla y navegación por teclado",
+      "a5": "Diseño adaptado para personas con discapacidad"
+    }
+  }
+}

@@ -1,30 +1,46 @@
-// Difficulty time (seconds) + win score target
-export const CLOCK_DIFFICULTY_CONFIG = {
-  easy: {
-    time: 30,
-    winScore: 5
-  },
-  medium: {
-    time: 45,
-    winScore: 10
-  },
-  hard: {
-    time: 60,
-    winScore: 15
-  }
-}
-
-// Joker base limits for Beat The Clock
 export const JOKER_BASE_LIMITS = {
-  skip: 1,
-  revealLetter: 1,
-  fiftyFifty: 1
+  // Classic
+  skip: 3,
+  revealLetter: 3,
+  fiftyFifty: 2,
+
+  // Beat The Clock
+  stopTimer: 2,
+  addTime: 2,
+
+  // Longest Streak Exclusive
+  protectStreak: 2,
+  instantWin: 2,
+}
+export const ANSWER_SCORE = {
+  perfect: 100,
+  close: 50,
+  almost: 20,
+  wrong: 0,
 }
 
-// Answer grading score values
-export const ANSWER_SCORE = {
-  perfect: 10,
-  close: 7,
-  almost: 4,
-  wrong: 0
+export const CLOCK_DIFFICULTY_CONFIG = {
+  easy: 60,
+  medium: 45,
+  hard: 30,
+}
+
+export const WIN_SCORE_CONFIG = {
+  easy: 500,
+  medium: 750,
+  hard: 1000,
+}
+
+// ✅ NEW: Timer effects per difficulty
+export const TIMER_EFFECTS = {
+  stopDuration: {
+    easy: 5,
+    medium: 4,
+    hard: 3,
+  },
+  addSeconds: {
+    easy: 10,
+    medium: 7,
+    hard: 5,
+  },
 }

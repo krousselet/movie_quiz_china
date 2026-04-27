@@ -1,0 +1,109 @@
+{
+  "home": {
+    "title": {
+      "movie": "Film",
+      "quiz": "Quiz"
+    },
+    "subtitle": "Indovina film, sfida il tempo, crea la tua serie e sblocca sfide cinematografiche",
+    "buttons": {
+      "play": {
+        "label": "Gioca",
+        "aria": "Inizia il quiz"
+      },
+      "rules": {
+        "label": "Regole",
+        "aria": "Leggi le regole del gioco"
+      },
+      "settings": {
+        "label": "Impostazioni",
+        "aria": "Apri le impostazioni dell'app"
+      }
+    }
+  },
+  "settings": {
+    "title": "Impostazioni",
+    "language": "Seleziona lingua",
+    "music": "Musica di sottofondo",
+    "darkMode": "Modalità scura",
+    "fontSize": "Dimensione carattere",
+    "small": "Piccola",
+    "normal": "Normale",
+    "large": "Grande"
+  },
+  "common": {
+    "back": "Indietro"
+  },
+  "rules": {
+    "pageTitle": "Regole del gioco",
+    "subTitle": "Scopri ogni modalità, difficoltà e jolly",
+    "classic": {
+      "title": "Modalità Classica",
+      "desc": "Gioca al tuo ritmo senza timer o pressioni.",
+      "point1": "Indovina i titoli dei film dalle locandine",
+      "point2": "Nessun limite di tempo",
+      "point3": "Nessuna difficoltà obbligatoria",
+      "point4": "Usa il pulsante Termina sessione per salvare le statistiche"
+    },
+    "beatClock": {
+      "title": "Sfida il tempo",
+      "desc": "Gara contro il tempo per indovinare {count} film in {min} minuti.",
+      "diffLabel": {
+        "easy": "Facile",
+        "medium": "Medio",
+        "hard": "Difficile",
+        "master": "Maestro"
+      },
+      "diffLine": "{diff}: {count} film in {min} minuti"
+    },
+    "streak": {
+      "title": "Serie vincente",
+      "desc": "Accumula risposte corrette di fila per completare la sfida.",
+      "lines": {
+        "easy": "Raggiungi una serie di {count} risposte corrette",
+        "medium": "Ottieni 2 vittorie consecutive",
+        "hard": "Ottieni 3 vittorie consecutive",
+        "master": "Indovina tutti senza errori"
+      }
+    },
+    "investigation": {
+      "title": "Modalità Indagine",
+      "desc": "La locandina è sfocata. Rispondi alle domande per rivelare i dettagli.",
+      "mech1": "Risposte corrette = schiarisci l'immagine",
+      "mech2": "Risposte errate = sfoca parti dell'immagine",
+      "diffLine": "{diff}: {count} domande",
+      "note": "Questa modalità verrà aggiunta per ultima."
+    },
+    "jokers": {
+      "title": "Sistema di jolly",
+      "desc": "Ogni modalità ha 3 jolly unici, utilizzabili una sola volta per sessione.",
+      "btcTitle": "Jolly Sfida il tempo",
+      "streakTitle": "Jolly Serie vincente",
+      "investTitle": "Jolly Modalità Indagine",
+      "btcSkip": "Salta film",
+      "btcPause": "Metti in pausa il timer per {secPause} secondi",
+      "btcAdd": "Aggiungi {secAdd} secondi al timer",
+      "btcReveal": "Rivela una lettera del titolo",
+      "str1": "Permetti un errore senza rompere la serie",
+      "str2": "Salta il film corrente",
+      "str3": "Rivela una lettera",
+      "inv1": "Rivela una lettera",
+      "inv2": "Ottieni un indizio",
+      "inv3": "Ottieni la risposta corretta"
+    },
+    "stats": {
+      "title": "Sessione e statistiche",
+      "s1": "Ogni sessione salva punteggio, serie, tentativi e tempo",
+      "s2": "Tutti i dati sono salvati localmente nel browser",
+      "s3": "La classifica ordina risultati per punteggio, tempo o data",
+      "s4": "Puoi saltare un film se non conosci la risposta"
+    },
+    "accessibility": {
+      "title": "Accessibilità e impostazioni",
+      "a1": "Attiva/disattiva modalità chiara/scura",
+      "a2": "Personalizza dimensione e stile carattere",
+      "a3": "Attiva/disattiva musica di sottofondo",
+      "a4": "Supporto lettore schermo e navigazione tastiera",
+      "a5": "Design accessibile per disabilità uditive e visive"
+    }
+  }
+}

@@ -1,19 +1,22 @@
-import { CLOCK_DIFFICULTY_CONFIG } from '@/constants/gameConfig'
+// src/composables/useGameWinCondition.ts
+import { CLOCK_DIFFICULTY_CONFIG, WIN_SCORE_CONFIG } from '@/constants/gameConfig'
 
 export function useGameWinCondition(difficulty: string) {
-  const config = CLOCK_DIFFICULTY_CONFIG[difficulty as keyof typeof CLOCK_DIFFICULTY_CONFIG]
-
-  const checkWin = (currentScore: number): boolean => {
-    return currentScore >= config.winScore
+  const getTimerDuration = (): number => {
+    return CLOCK_DIFFICULTY_CONFIG[difficulty as keyof typeof CLOCK_DIFFICULTY_CONFIG] || 45
   }
 
-  const getWinTarget = () => config.winScore
+  const getWinTarget = (): number => {
+    return WIN_SCORE_CONFIG[difficulty as keyof typeof WIN_SCORE_CONFIG] || 750
+  }
 
-  const getTimerDuration = () => config.time
+  const checkWin = (currentScore: number): boolean => {
+    return currentScore >= getWinTarget()
+  }
 
   return {
     checkWin,
     getWinTarget,
-    getTimerDuration
+    getTimerDuration,
   }
 }

@@ -1,0 +1,109 @@
+{
+  "home": {
+    "title": {
+      "movie": "Film",
+      "quiz": "Kuis"
+    },
+    "subtitle": "Tebak film, lawan waktu, tingkatkan rentetan jawaban & buka tantangan sinema",
+    "buttons": {
+      "play": {
+        "label": "Main Game",
+        "aria": "Mulai memainkan kuis"
+      },
+      "rules": {
+        "label": "Aturan",
+        "aria": "Baca aturan permainan"
+      },
+      "settings": {
+        "label": "Pengaturan",
+        "aria": "Buka pengaturan aplikasi"
+      }
+    }
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "language": "Pilih Bahasa",
+    "music": "Musik Latar",
+    "darkMode": "Mode Gelap",
+    "fontSize": "Ukuran Font",
+    "small": "Kecil",
+    "normal": "Normal",
+    "large": "Besar"
+  },
+  "common": {
+    "back": "Kembali"
+  },
+  "rules": {
+    "pageTitle": "Aturan Game",
+    "subTitle": "Pahami setiap mode, tingkat kesulitan dan joker",
+    "classic": {
+      "title": "Mode Klasik",
+      "desc": "Bermain dengan ritme sendiri tanpa pengatur waktu atau tekanan.",
+      "point1": "Tebak judul film dari poster",
+      "point2": "Tanpa batas waktu",
+      "point3": "Tidak ada kesulitan wajib",
+      "point4": "Gunakan tombol Akhiri Sesi untuk menyimpan statistikmu"
+    },
+    "beatClock": {
+      "title": "Lawan Waktu",
+      "desc": "Berpacu dengan waktu untuk menebak sejumlah film dalam {min} menit.",
+      "diffLabel": {
+        "easy": "Mudah",
+        "medium": "Sedang",
+        "hard": "Sulit",
+        "master": "Mahir"
+      },
+      "diffLine": "{diff}: {count} film dalam {min} menit"
+    },
+    "streak": {
+      "title": "Rentetan Jawaban Benar",
+      "desc": "Rangkaikan jawaban benar secara berurutan untuk menyelesaikan tantangan.",
+      "lines": {
+        "easy": "Capai rentetan {count} jawaban film yang benar",
+        "medium": "Menangkan 2 tebakan secara berurutan",
+        "hard": "Menangkan 3 tebakan secara berurutan",
+        "master": "Temukan semua jawaban tanpa kesalahan"
+      }
+    },
+    "investigation": {
+      "title": "Mode Investigasi",
+      "desc": "Poster dikaburkan. Jawab pertanyaan untuk menampilkan detail.",
+      "mech1": "Jawaban benar = menghilangkan kabur pada poster",
+      "mech2": "Jawaban salah = mengaburkan kembali bagian gambar",
+      "diffLine": "{diff}: {count} pertanyaan",
+      "note": "Mode ini akan diterapkan terakhir."
+    },
+    "jokers": {
+      "title": "Sistem Joker",
+      "desc": "Setiap mode game memiliki 3 joker unik, hanya dapat digunakan sekali per sesi.",
+      "btcTitle": "Joker Lawan Waktu",
+      "streakTitle": "Joker Rentetan Jawaban",
+      "investTitle": "Joker Mode Investigasi",
+      "btcSkip": "Lewati satu film",
+      "btcPause": "Jeda pengatur waktu selama {secPause} detik",
+      "btcAdd": "Tambah {secAdd} detik pada pengatur waktu",
+      "btcReveal": "Tampilkan satu huruf judul",
+      "str1": "Izinkan satu kesalahan tanpa memutus rentetan",
+      "str2": "Lewati film saat ini",
+      "str3": "Tampilkan satu huruf",
+      "inv1": "Tampilkan satu huruf",
+      "inv2": "Dapatkan petunjuk untuk pertanyaan",
+      "inv3": "Dapatkan jawaban benar untuk satu pertanyaan"
+    },
+    "stats": {
+      "title": "Sesi & Statistik",
+      "s1": "Setiap sesi menyimpan skor, rentetan, percobaan dan waktu",
+      "s2": "Semua data disimpan secara lokal di peramban",
+      "s3": "Papan peringkat mengurutkan hasil berdasarkan skor, waktu atau tanggal",
+      "s4": "Kamu bisa melewati film jika tidak menemukan jawaban"
+    },
+    "accessibility": {
+      "title": "Aksesibilitas & Pengaturan",
+      "a1": "Beralih mode Gelap / Terang",
+      "a2": "Kustomisasi ukuran dan gaya font",
+      "a3": "Tombol pengatur musik latar",
+      "a4": "Dukungan pembaca layar penuh dan navigasi papan ketik",
+      "a5": "Desain ramah untuk tunarungu dan tunanetra"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { createI18n } from 'vue-i18n'
+import en from './en.json'
 import fr from './fr.json'
 import id from './id.json'
 import zh from './zh.json'
@@ -7,9 +8,14 @@ import ru from './ru.json'
 import it from './it.json'
 import es from './es.json'
 
+// Load saved language first
+const savedLocale = localStorage.getItem('user-locale') || 'en'
+
 export const i18n = createI18n({
   legacy: false,
-  locale: 'zh', // Default: Chinese (China accessible)
+  locale: savedLocale, //  Used so automatically detects the local language in the browser
   fallbackLocale: 'en',
-  messages: { fr, id, zh, ja, ru, it, es }
+  messages: { en, fr, id, zh, ja, ru, it, es },
+  missingWarn: false,
+  fallbackWarn: false,
 })
