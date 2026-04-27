@@ -26,14 +26,14 @@
       <div class="rule-block">
         <h2 class="rule-title">⏱️ {{ $t('rules.beatClock.title') }}</h2>
         <div class="rule-content">
-          <p>{{ $t('rules.beatClock.desc', { min: GAME_CONFIG.modes.beatTheClock.timeLimit }) }}</p>
+          <p>{{ $t('rules.beatClock.desc', { min: rules.modes.beatTheClock.timeLimit }) }}</p>
           <ul>
             <li>
               {{
                 $t('rules.beatClock.diffLine', {
                   diff: $t('rules.beatClock.diffLabel.easy'),
-                  count: GAME_CONFIG.modes.beatTheClock.difficulties.easy,
-                  min: GAME_CONFIG.modes.beatTheClock.timeLimit,
+                  count: rules.modes.beatTheClock.difficulties.easy,
+                  min: rules.modes.beatTheClock.timeLimit,
                 })
               }}
             </li>
@@ -41,8 +41,8 @@
               {{
                 $t('rules.beatClock.diffLine', {
                   diff: $t('rules.beatClock.diffLabel.medium'),
-                  count: GAME_CONFIG.modes.beatTheClock.difficulties.medium,
-                  min: GAME_CONFIG.modes.beatTheClock.timeLimit,
+                  count: rules.modes.beatTheClock.difficulties.medium,
+                  min: rules.modes.beatTheClock.timeLimit,
                 })
               }}
             </li>
@@ -50,8 +50,8 @@
               {{
                 $t('rules.beatClock.diffLine', {
                   diff: $t('rules.beatClock.diffLabel.hard'),
-                  count: GAME_CONFIG.modes.beatTheClock.difficulties.hard,
-                  min: GAME_CONFIG.modes.beatTheClock.timeLimit,
+                  count: rules.modes.beatTheClock.difficulties.hard,
+                  min: rules.modes.beatTheClock.timeLimit,
                 })
               }}
             </li>
@@ -59,8 +59,8 @@
               {{
                 $t('rules.beatClock.diffLine', {
                   diff: $t('rules.beatClock.diffLabel.master'),
-                  count: GAME_CONFIG.modes.beatTheClock.difficulties.master,
-                  min: GAME_CONFIG.modes.beatTheClock.timeLimit,
+                  count: rules.modes.beatTheClock.difficulties.master,
+                  min: rules.modes.beatTheClock.timeLimit,
                 })
               }}
             </li>
@@ -77,7 +77,7 @@
             <li>
               {{
                 $t('rules.streak.lines.easy', {
-                  count: GAME_CONFIG.modes.longestStreak.difficulties.easy,
+                  count: rules.modes.longestStreak.difficulties.easy,
                 })
               }}
             </li>
@@ -100,7 +100,7 @@
               {{
                 $t('rules.investigation.diffLine', {
                   diff: $t('rules.beatClock.diffLabel.easy'),
-                  count: GAME_CONFIG.modes.investigation.difficulties.easy,
+                  count: rules.modes.investigation.difficulties.easy,
                 })
               }}
             </li>
@@ -108,7 +108,7 @@
               {{
                 $t('rules.investigation.diffLine', {
                   diff: $t('rules.beatClock.diffLabel.medium'),
-                  count: GAME_CONFIG.modes.investigation.difficulties.medium,
+                  count: rules.modes.investigation.difficulties.medium,
                 })
               }}
             </li>
@@ -116,7 +116,7 @@
               {{
                 $t('rules.investigation.diffLine', {
                   diff: $t('rules.beatClock.diffLabel.hard'),
-                  count: GAME_CONFIG.modes.investigation.difficulties.hard,
+                  count: rules.modes.investigation.difficulties.hard,
                 })
               }}
             </li>
@@ -124,7 +124,7 @@
               {{
                 $t('rules.investigation.diffLine', {
                   diff: $t('rules.beatClock.diffLabel.master'),
-                  count: GAME_CONFIG.modes.investigation.difficulties.master,
+                  count: rules.modes.investigation.difficulties.master,
                 })
               }}
             </li>
@@ -147,14 +147,12 @@
             <li>
               {{
                 $t('rules.jokers.btcPause', {
-                  secPause: GAME_CONFIG.modes.beatTheClock.jokerPauseSec,
+                  secPause: rules.modes.beatTheClock.jokerPauseSec,
                 })
               }}
             </li>
             <li>
-              {{
-                $t('rules.jokers.btcAdd', { secAdd: GAME_CONFIG.modes.beatTheClock.jokerTimeAdd })
-              }}
+              {{ $t('rules.jokers.btcAdd', { secAdd: rules.modes.beatTheClock.jokerTimeAdd }) }}
             </li>
             <li>{{ $t('rules.jokers.btcReveal') }}</li>
           </ul>
@@ -202,7 +200,8 @@
 </template>
 
 <script setup lang="ts">
-import { GAME_CONFIG } from '@/config/gameRules'
+import { useGameRules } from '@/config/gameRules'
+const rules = useGameRules()
 </script>
 
 <style scoped lang="scss">

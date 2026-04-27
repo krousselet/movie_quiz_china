@@ -2,7 +2,7 @@
   <section class="game-page">
     <div class="cinema-overlay"></div>
 
-    <div v-if="isLoading" class="loading">Loading...</div>
+    <div v-if="isLoading" class="loading">{{ $t('game.loading') }}</div>
 
     <div class="game-container" v-else>
       <!-- STATS -->
@@ -32,13 +32,13 @@
           :is-disabled="jokers.revealLetter <= 0"
           @click="handleRevealLetter"
         >
-          Reveal Letter ({{ jokers.revealLetter }})
+          {{ $t('rules.jokers.btcReveal') }} ({{ jokers.revealLetter }})
         </GameButton>
 
         <!-- CLASSIC -->
         <template v-if="mode === 'classic'">
           <GameButton variant="joker" :is-disabled="jokers.skip <= 0" @click="handleAutoCorrect">
-            Auto Correct ({{ jokers.skip }})
+            {{ $t('rules.jokers.str2') }} ({{ jokers.skip }})
           </GameButton>
 
           <GameButton variant="joker" :is-disabled="jokers.fiftyFifty <= 0" @click="openFiftyFifty">
@@ -49,22 +49,24 @@
         <!-- BEAT THE CLOCK -->
         <template v-else-if="mode === 'beat-the-clock'">
           <GameButton variant="joker" :is-disabled="jokers.skip <= 0" @click="useSkip(nextMovie)">
-            Skip ({{ jokers.skip }})
+            {{ $t('rules.jokers.btcSkip') }} ({{ jokers.skip }})
           </GameButton>
 
           <GameButton variant="joker" :is-disabled="jokers.stopTimer <= 0" @click="handleStopTimer">
-            Stop Timer ({{ jokers.stopTimer }})
+            {{ $t('rules.jokers.btcPause', { secPause: 10 }) }}
+            ({{ jokers.stopTimer }})
           </GameButton>
 
           <GameButton variant="joker" :is-disabled="jokers.addTime <= 0" @click="handleAddTime">
-            Add Time ({{ jokers.addTime }})
+            {{ $t('rules.jokers.btcAdd', { secAdd: 15 }) }}
+            ({{ jokers.addTime }})
           </GameButton>
         </template>
 
         <!-- LONGEST STREAK -->
         <template v-else-if="mode === 'longest-streak'">
           <GameButton variant="joker" :is-disabled="jokers.skip <= 0" @click="useSkip(nextMovie)">
-            Skip ({{ jokers.skip }})
+            {{ $t('rules.jokers.str2') }} ({{ jokers.skip }})
           </GameButton>
 
           <GameButton
@@ -72,7 +74,7 @@
             :is-disabled="jokers.protectStreak <= 0"
             @click="handleProtectStreak"
           >
-            Protect Streak ({{ jokers.protectStreak }})
+            {{ $t('rules.jokers.str1') }} ({{ jokers.protectStreak }})
           </GameButton>
 
           <GameButton
@@ -80,7 +82,7 @@
             :is-disabled="jokers.instantWin <= 0"
             @click="handleInstantWin"
           >
-            Instant Win ({{ jokers.instantWin }})
+            {{ $t('game.instantWin') }} ({{ jokers.instantWin }})
           </GameButton>
         </template>
       </div>
@@ -90,34 +92,42 @@
         <input
           v-model="userAnswer"
           @keyup.enter="checkAnswer"
-          placeholder="Type your guess..."
+          :placeholder="$t('game.placeholder')"
           class="answer-input"
           :class="{ error: showError }"
         />
-        <GameButton variant="submit" @click="checkAnswer"> Submit </GameButton>
+        <GameButton variant="submit" @click="checkAnswer">
+          {{ $t('game.submit') }}
+        </GameButton>
       </div>
 
-      <p v-if="showError" class="error-text">Please enter a guess!</p>
+      <p v-if="showError" class="error-text">{{ $t('game.empty') }}</p>
 
       <!-- FEEDBACK -->
       <div class="feedback" :class="feedbackType">
-        <span v-if="feedbackType === 'perfect'">Perfect!</span>
-        <span v-else-if="feedbackType === 'close'">Close!</span>
-        <span v-else-if="feedbackType === 'almost'">Almost!</span>
-        <span v-else-if="feedbackType === 'wrong'">Wrong! Answer: {{ correctAnswer }}</span>
+        <span v-if="feedbackType === 'perfect'">{{ $t('game.perfect') }}</span>
+        <span v-else-if="feedbackType === 'close'">{{ $t('game.close') }}</span>
+        <span v-else-if="feedbackType === 'almost'">{{ $t('game.almost') }}</span>
+        <span v-else-if="feedbackType === 'wrong'">
+          {{ $t('game.wrong') }}! {{ $t('game.answer') }}: {{ correctAnswer }}
+        </span>
       </div>
 
       <!-- ACTION BUTTONS -->
       <div class="button-row">
-        <GameButton variant="skip" @click="nextMovie">Skip</GameButton>
-        <GameButton variant="danger" @click="endSession">Quit</GameButton>
+        <GameButton variant="skip" @click="nextMovie">
+          {{ $t('game.skip') }}
+        </GameButton>
+        <GameButton variant="danger" @click="endSession">
+          {{ $t('game.quit') }}
+        </GameButton>
       </div>
     </div>
 
     <!-- 50/50 MODAL -->
     <div v-if="showFiftyModal" class="modal-overlay">
       <div class="modal-card">
-        <h3>Choose the correct title</h3>
+        <h3>{{ $t('game.correctTitle') }}</h3>
         <div class="choices">
           <GameButton variant="choice" @click="choose(option1)">{{ option1 }}</GameButton>
           <GameButton variant="choice" @click="choose(option2)">{{ option2 }}</GameButton>
@@ -130,8 +140,10 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, provide } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n' // ⬅️ ADD THIS
+const { t } = useI18n() // ⬅️ ADD THIS
 
-// UI COMPONENTS
+// UI
 import '@/components/game/ui/game-ui.css'
 import GameStats from '@/components/game/ui/GameStats.vue'
 import MoviePoster from '@/components/game/ui/MoviePoster.vue'
@@ -242,12 +254,10 @@ const checkAnswer = () => {
       addStreak()
     },
     () => {
-      // Just break streak — no blocking
       breakStreak()
     },
   )
 
-  // ✅ FORCE NEXT MOVIE NO MATTER WHAT
   setTimeout(() => {
     reset()
     userAnswer.value = ''
@@ -319,9 +329,6 @@ onUnmounted(() => timer.clearTimer())
 </script>
 
 <style scoped>
-/* =============================
-   FULL RESPONSIVE - NO SCROLLBAR
-   ============================= */
 .game-page {
   min-height: 100vh;
   height: 100vh;
@@ -352,59 +359,6 @@ onUnmounted(() => timer.clearTimer())
   overflow: hidden;
 }
 
-/* Poster */
-.poster-card {
-  background: #1e293b;
-  padding: 0.6rem;
-  border-radius: 12px;
-  border: 2px solid #fbbf24;
-  flex: 1;
-  min-height: 200px;
-  max-height: 45vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition:
-    transform 0.4s ease,
-    opacity 0.4s ease;
-}
-
-.poster {
-  max-height: 42vh;
-  max-width: 100%;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
-.poster-card.slideOut {
-  transform: translateX(150vw);
-  opacity: 0;
-}
-
-/* Stats */
-.game-stats {
-  display: flex;
-  gap: 0.8rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 0;
-}
-
-.stat {
-  background: #1e293b;
-  padding: 0.5rem 0.9rem;
-  border-radius: 8px;
-  border: 1px solid #334155;
-  color: #fbbf24;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.stat.warning {
-  color: #ef4444;
-}
-
-/* Hangman */
 .hangman-mask {
   font-size: clamp(1.2rem, 4vw, 2rem);
   color: #fbbf24;
@@ -416,7 +370,6 @@ onUnmounted(() => timer.clearTimer())
   flex-wrap: wrap;
 }
 
-/* Jokers */
 .joker-row {
   display: flex;
   gap: 0.5rem;
@@ -425,7 +378,6 @@ onUnmounted(() => timer.clearTimer())
   margin: 0;
 }
 
-/* Answer Input */
 .answer-box {
   display: flex;
   gap: 0.5rem;
@@ -442,7 +394,6 @@ onUnmounted(() => timer.clearTimer())
   font-size: 0.9rem;
 }
 
-/* Buttons */
 .button-row {
   display: flex;
   gap: 0.8rem;
@@ -450,7 +401,6 @@ onUnmounted(() => timer.clearTimer())
   margin-top: 0.2rem;
 }
 
-/* Feedback */
 .feedback {
   padding: 0.4rem;
   border-radius: 8px;
@@ -473,7 +423,6 @@ onUnmounted(() => timer.clearTimer())
   color: #ef4444;
 }
 
-/* Modal */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -501,7 +450,6 @@ onUnmounted(() => timer.clearTimer())
   margin-top: 1rem;
 }
 
-/* Prevent any scroll anywhere */
 :global(body),
 :global(html),
 :global(#app) {

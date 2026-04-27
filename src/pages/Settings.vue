@@ -3,21 +3,17 @@
     <div class="settings-container">
       <h1 class="page-title">{{ $t('settings.title') }}</h1>
 
-      <!-- 👇 LANGUAGE SELECTOR IS HERE — WILL NOT DISAPPEAR -->
+      <!-- SELECTEUR DE LANGUES PROPRE -->
       <div class="settings-card">
         <label class="label">{{ $t('settings.language') }}</label>
         <select v-model="currentLang" @change="changeLanguage" class="select">
-          <option value="en">English</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-          <option value="id">Bahasa Indonesia</option>
-          <option value="ja">日本語</option>
-          <option value="ru">Русский</option>
-          <option value="zh">中文</option>
+          <option v-for="lang in languages" :key="lang.code" :value="lang.code">
+            {{ lang.label }}
+          </option>
         </select>
       </div>
 
-      <!-- 🎵 MUSIC -->
+      <!-- MUSIQUE -->
       <div class="settings-card">
         <label class="settings-label">
           {{ $t('settings.music') }}
@@ -25,7 +21,7 @@
         </label>
       </div>
 
-      <!-- 🌙 DARK MODE -->
+      <!-- MODE SOMBRE -->
       <div class="settings-card">
         <label class="settings-label">
           {{ $t('settings.darkMode') }}
@@ -33,7 +29,7 @@
         </label>
       </div>
 
-      <!-- 🔠 FONT SIZE -->
+      <!-- TAILLE POLICE -->
       <div class="settings-card">
         <label class="settings-label">
           {{ $t('settings.fontSize') }}
@@ -45,7 +41,7 @@
         </label>
       </div>
 
-      <!-- BACK BUTTON -->
+      <!-- BOUTON RETOUR -->
       <button @click="goBack" class="back-btn">{{ $t('common.back') }}</button>
     </div>
   </main>
@@ -59,41 +55,56 @@ import { useI18n } from 'vue-i18n'
 const router = useRouter()
 const { locale } = useI18n()
 
-// LANGUAGE
+// LISTE COMPLETE DES LANGUES (utilisée dans le template)
+const languages = [
+  { code: 'en', label: 'English' },
+  { code: 'fr', label: 'Français' },
+  { code: 'es', label: 'Español' },
+  { code: 'id', label: 'Bahasa Indonesia' },
+  { code: 'ja', label: '日本語' },
+  { code: 'ru', label: 'Русский' },
+  { code: 'zh', label: '中文' },
+  { code: 'it', label: 'Italiano' },
+]
+
+// ÉTATS
 const currentLang = ref(locale.value)
+const musicEnabled = ref(true)
+const darkMode = ref(false)
+const fontSize = ref('normal')
+
+// CHARGEMENT DES PREFERENCES
+onMounted(() => {
+  currentLang.value = locale.value
+  musicEnabled.value = localStorage.getItem('music-enabled') !== 'false'
+  darkMode.value = localStorage.getItem('dark-mode') === 'true'
+  fontSize.value = localStorage.getItem('font-size') || 'normal'
+})
+
+// 🔁 CHANGER DE LANGUE
 const changeLanguage = () => {
   locale.value = currentLang.value
   localStorage.setItem('user-locale', currentLang.value)
 }
 
-// MUSIC
-const musicEnabled = ref(true)
+// 🎵 MUSIQUE
 const toggleMusic = () => {
   localStorage.setItem('music-enabled', musicEnabled.value ? 'true' : 'false')
 }
 
-// DARK MODE
-const darkMode = ref(false)
+// 🌙 MODE SOMBRE
 const toggleDarkMode = () => {
   document.documentElement.classList.toggle('dark', darkMode.value)
   localStorage.setItem('dark-mode', darkMode.value ? 'true' : 'false')
 }
 
-// FONT
-const fontSize = ref('normal')
+// 🔠 TAILLE DE POLICE
 const changeFont = () => {
   document.documentElement.dataset.fontSize = fontSize.value
   localStorage.setItem('font-size', fontSize.value)
 }
 
-// LOAD
-onMounted(() => {
-  musicEnabled.value = localStorage.getItem('music-enabled') !== 'false'
-  darkMode.value = localStorage.getItem('dark-mode') === 'true'
-  fontSize.value = localStorage.getItem('font-size') || 'normal'
-  currentLang.value = locale.value
-})
-
+// ← RETOUR
 const goBack = () => router.back()
 </script>
 
@@ -107,7 +118,6 @@ const goBack = () => router.back()
   background: var(--bg-primary);
   padding: 2rem;
 }
-
 .settings-container {
   width: 100%;
   max-width: 550px;
@@ -115,20 +125,17 @@ const goBack = () => router.back()
   flex-direction: column;
   gap: 1rem;
 }
-
 .page-title {
   text-align: center;
   font-size: 1.8rem;
   color: var(--text-primary);
 }
-
 .settings-card {
   background: var(--bg-secondary);
   padding: 1.2rem 1.5rem;
   border-radius: 12px;
   border: 1px solid var(--border-color);
 }
-
 .settings-label {
   display: flex;
   justify-content: space-between;
@@ -136,14 +143,12 @@ const goBack = () => router.back()
   color: var(--text-primary);
   font-weight: 500;
 }
-
 .label {
   font-size: 0.95rem;
   margin-bottom: 0.4rem;
   display: block;
   color: var(--text-primary);
 }
-
 .select {
   width: 100%;
   padding: 0.8rem 1rem;
@@ -152,7 +157,6 @@ const goBack = () => router.back()
   color: var(--text-primary);
   border: 1px solid var(--border-color);
 }
-
 .back-btn {
   padding: 1rem;
   border-radius: 10px;

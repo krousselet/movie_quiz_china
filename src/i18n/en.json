@@ -1,0 +1,141 @@
+{
+  "home": {
+    "title": {
+      "movie": "Movie",
+      "quiz": "Quiz"
+    },
+    "subtitle": "Guess movies, beat the clock, build your streak and unlock cinema challenges",
+    "buttons": {
+      "play": {
+        "label": "Play",
+        "aria": "Start the game"
+      },
+      "rules": {
+        "label": "Rules",
+        "aria": "Read the rules of the game"
+      },
+      "settings": {
+        "label": "Settings",
+        "aria": "Adjust the settings"
+      }
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language selection",
+    "music": "Music",
+    "darkMode": "Dark mode",
+    "fontSize": "Change the size of the font",
+    "fontStyle": "Change font style",
+    "small": "Small",
+    "normal": "Normal",
+    "large": "Big"
+  },
+  "common": {
+    "back": "Return"
+  },
+  "play": {
+    "pageTitle": "Choose Your Challenge",
+    "pageDescription": "Select a game mode & difficulty to start a new quiz session",
+    "gameDescription": "Game Mode",
+    "startGame": "Start game"
+  },
+  "game": {
+    "loading": "Loading...",
+    "submit": "Submit",
+    "skip": "Skip",
+    "quit": "Quit",
+    "empty": "Please enter your guess!",
+    "perfect": "Perfect!",
+    "close": "Close!",
+    "almost": "Almost!",
+    "wrong": "Wrong",
+    "answer": "Answer",
+    "placeholder": "Type your guess...",
+    "correctTitle": "Choose the correct title",
+    "instantWin": "Instant Win"
+  },
+  "leaderboard": {
+    "pageTitle": "Leaderboard",
+    "pageDescription": "Your saved game sessions",
+    "clearLeaderboard": "Clear Leaderboard",
+    "noSave": "No saved games yet.",
+    "message": "Play a Classic mode game and click \"End Game & Save Score\"",
+    "score": "Score:",
+    "bestStreak": "Best Streak: ",
+    "backMenu": "Back to Menu"
+  },
+  "rules": {
+    "pageTitle": "Rules of the game",
+    "subTitle": "Know each mode, difficulty and rules",
+    "classic": {
+      "title": "Classic mode",
+      "desc": "Play to your own rhythm, without clock nor stress",
+      "point1": "Guess the titles based on the pictures",
+      "point2": "Without time limit",
+      "point3": "Without fixed difficulty",
+      "point4": "Use the button to end the session and save the statistics"
+    },
+    "beatClock": {
+      "title": "Beat-the-clock",
+      "desc": "Compete against the clock to guess {count} movies in {min} minutes.",
+      "diffLabel": {
+        "easy": "Easy",
+        "medium": "Medium",
+        "hard": "Hard",
+        "master": "Master"
+      },
+      "diffLine": "{diff}: {count} movies in {min} minutes"
+    },
+    "streak": {
+      "title": "Longest streak",
+      "desc": "Keep the streak flowing to win",
+      "lines": {
+        "easy": "Reach a streak of {count} correct answers",
+        "medium": "Win 2 pairs in a row",
+        "hard": "Win 3 pairs in a row",
+        "master": "Discover all pairs without mistake"
+      }
+    },
+    "investigation": {
+      "title": "Investigation mode",
+      "desc": "The poster is blurred. Answer questions to reveal details.",
+      "mech1": "Correct answers = unblur the poster",
+      "mech2": "Wrong answers = re‑blur parts of the image",
+      "diffLine": "{diff}: {count} questions",
+      "note": "This mode will be implemented last."
+    },
+    "jokers": {
+      "title": "How do jokers work?",
+      "desc": "Each mode has unique jokers, usable a limited number of times depending on difficulty",
+      "btcTitle": "Beat The Clock Jokers",
+      "streakTitle": "Longest Streak Jokers",
+      "investTitle": "Investigation Jokers",
+      "btcSkip": "Skip a movie",
+      "btcPause": "Pause the timer for 10 seconds",
+      "btcAdd": "Add 15 seconds to the timer",
+      "btcReveal": "Reveal one letter of the title",
+      "str1": "Allow one mistake without breaking streak",
+      "str2": "Skip the current movie",
+      "str3": "Reveal one letter",
+      "inv1": "Reveal one letter",
+      "inv2": "Get a hint for a question",
+      "inv3": "Get the correct answer for one question"
+    },
+    "stats": {
+      "title": "Game session and statistics",
+      "s1": "Score, streak, attempts and time are saved",
+      "s2": "Data stored locally in your browser",
+      "s3": "Leaderboard sorted by score, time or date",
+      "s4": "Skip a movie if you don’t know the answer"
+    },
+    "accessibility": {
+      "title": "Accessibility and settings",
+      "a1": "Toggle Dark / Light mode",
+      "a2": "Customize font size and style",
+      "a3": "Turn background music on / off",
+      "a4": "Full screen reader and keyboard navigation support",
+      "a5": "Deaf & visually impaired friendly design"
+    }
+  }
+}

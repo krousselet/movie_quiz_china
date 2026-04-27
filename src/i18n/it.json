@@ -1,0 +1,141 @@
+{
+  "home": {
+    "title": {
+      "movie": "Film",
+      "quiz": "Quiz"
+    },
+    "subtitle": "Indovina i film, batti il tempo, crea la tua serie e sblocca sfide cinematografiche",
+    "buttons": {
+      "play": {
+        "label": "Gioca",
+        "aria": "Inizia il gioco"
+      },
+      "rules": {
+        "label": "Regole",
+        "aria": "Leggi le regole del gioco"
+      },
+      "settings": {
+        "label": "Impostazioni",
+        "aria": "Regola le impostazioni"
+      }
+    }
+  },
+  "settings": {
+    "title": "Impostazioni",
+    "language": "Selezione lingua",
+    "music": "Musica",
+    "darkMode": "Modalità scura",
+    "fontSize": "Cambia dimensione carattere",
+    "fontStyle": "Cambia stile carattere",
+    "small": "Piccola",
+    "normal": "Normale",
+    "large": "Grande"
+  },
+  "common": {
+    "back": "Indietro"
+  },
+  "play": {
+    "pageTitle": "Scegli la tua sfida",
+    "pageDescription": "Seleziona una modalità e difficoltà per iniziare una nuova partita",
+    "gameDescription": "Modalità di gioco",
+    "startGame": "Inizia gioco"
+  },
+  "game": {
+    "loading": "Caricamento...",
+    "submit": "Invia",
+    "skip": "Salta",
+    "quit": "Esci",
+    "empty": "Inserisci la tua risposta!",
+    "perfect": "Perfetto!",
+    "close": "Vicino!",
+    "almost": "Quasi!",
+    "wrong": "Sbagliato",
+    "answer": "Risposta",
+    "placeholder": "Scrivi la tua ipotesi...",
+    "correctTitle": "Scegli il titolo corretto",
+    "instantWin": "Vittoria immediata"
+  },
+  "leaderboard": {
+    "pageTitle": "Classifica",
+    "pageDescription": "Le tue partite salvate",
+    "clearLeaderboard": "Pulisci classifica",
+    "noSave": "Nessuna partita salvata.",
+    "message": "Gioca in modalità Classica e clicca \"Termina partita e salva punteggio\"",
+    "score": "Punteggio:",
+    "bestStreak": "Miglior serie: ",
+    "backMenu": "Torna al menu"
+  },
+  "rules": {
+    "pageTitle": "Regole del gioco",
+    "subTitle": "Conosci ogni modalità, difficoltà e regola",
+    "classic": {
+      "title": "Modalità classica",
+      "desc": "Gioca al tuo ritmo, senza tempo né stress",
+      "point1": "Indovina i titoli dalle immagini",
+      "point2": "Senza limite di tempo",
+      "point3": "Senza difficoltà fissa",
+      "point4": "Usa il pulsante per terminare la partita e salvare le statistiche"
+    },
+    "beatClock": {
+      "title": "Contro il tempo",
+      "desc": "Competiti contro il tempo per indovinare {count} film in {min} minuti.",
+      "diffLabel": {
+        "easy": "Facile",
+        "medium": "Medio",
+        "hard": "Difficile",
+        "master": "Maestro"
+      },
+      "diffLine": "{diff}: {count} film in {min} minuti"
+    },
+    "streak": {
+      "title": "Seria più lunga",
+      "desc": "Mantieni la serie per vincere",
+      "lines": {
+        "easy": "Raggiungi una serie di {count} risposte corrette",
+        "medium": "Vinci 2 coppie di seguito",
+        "hard": "Vinci 3 coppie di seguito",
+        "master": "Scopri tutte le coppie senza errori"
+      }
+    },
+    "investigation": {
+      "title": "Modalità investigazione",
+      "desc": "Il poster è sfocato. Rispondi alle domande per rivelare dettagli.",
+      "mech1": "Risposte corrette = immagine meno sfocata",
+      "mech2": "Risposte sbagliate = parte dell'immagine sfocata",
+      "diffLine": "{diff}: {count} domande",
+      "note": "Questa modalità sarà implementata per ultima."
+    },
+    "jokers": {
+      "title": "Come funzionano i jolly?",
+      "desc": "Ogni modalità ha jolly unici, utilizzabili un numero limitato di volte in base alla difficoltà",
+      "btcTitle": "Jolly Contro il Tempo",
+      "streakTitle": "Jolly Seria Lunga",
+      "investTitle": "Jolly Investigazione",
+      "btcSkip": "Salta un film",
+      "btcPause": "Metti in pausa il timer per 10 secondi",
+      "btcAdd": "Aggiungi 15 secondi al timer",
+      "btcReveal": "Rivela una lettera del titolo",
+      "str1": "Permetti un errore senza rompere la serie",
+      "str2": "Salta il film attuale",
+      "str3": "Rivela una lettera",
+      "inv1": "Rivela una lettera",
+      "inv2": "Ottieni un indizio per una domanda",
+      "inv3": "Ottieni la risposta corretta per una domanda"
+    },
+    "stats": {
+      "title": "Partita e statistiche",
+      "s1": "Vengono salvati punteggio, serie, tentativi e tempo",
+      "s2": "Dati memorizzati localmente nel browser",
+      "s3": "Classifica per punteggio, tempo o data",
+      "s4": "Salta un film se non conosci la risposta"
+    },
+    "accessibility": {
+      "title": "Accessibilità e impostazioni",
+      "a1": "Cambia modalità chiara/scura",
+      "a2": "Personalizza dimensione e stile carattere",
+      "a3": "Accendi/spegni musica di sottofondo",
+      "a4": "Supporto completo lettore schermo e navigazione tastiera",
+      "a5": "Design adatto a sordi e ipovedenti"
+    }
+  }
+}

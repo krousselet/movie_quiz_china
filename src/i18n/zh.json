@@ -1,0 +1,141 @@
+{
+  "home": {
+    "title": {
+      "movie": "电影",
+      "quiz": "测验"
+    },
+    "subtitle": "猜电影，挑战计时，创造连胜，解锁电影挑战",
+    "buttons": {
+      "play": {
+        "label": "开始游戏",
+        "aria": "开始游戏"
+      },
+      "rules": {
+        "label": "规则",
+        "aria": "阅读游戏规则"
+      },
+      "settings": {
+        "label": "设置",
+        "aria": "调整设置"
+      }
+    }
+  },
+  "settings": {
+    "title": "设置",
+    "language": "选择语言",
+    "music": "音乐",
+    "darkMode": "深色模式",
+    "fontSize": "更改字体大小",
+    "fontStyle": "更改字体样式",
+    "small": "小",
+    "normal": "中",
+    "large": "大"
+  },
+  "common": {
+    "back": "返回"
+  },
+  "play": {
+    "pageTitle": "选择你的挑战",
+    "pageDescription": "选择游戏模式和难度开始新的测验",
+    "gameDescription": "游戏模式",
+    "startGame": "开始游戏"
+  },
+  "game": {
+    "loading": "加载中...",
+    "submit": "提交",
+    "skip": "跳过",
+    "quit": "退出",
+    "empty": "请输入你的猜测！",
+    "perfect": "完美！",
+    "close": "很接近！",
+    "almost": "差一点！",
+    "wrong": "错误",
+    "answer": "正确答案",
+    "placeholder": "输入你的猜测...",
+    "correctTitle": "选择正确的电影名",
+    "instantWin": "直接获胜"
+  },
+  "leaderboard": {
+    "pageTitle": "排行榜",
+    "pageDescription": "你保存的游戏记录",
+    "clearLeaderboard": "清空排行榜",
+    "noSave": "暂无保存的游戏。",
+    "message": "游玩经典模式并点击“结束游戏并保存分数”",
+    "score": "分数：",
+    "bestStreak": "最佳连胜：",
+    "backMenu": "返回菜单"
+  },
+  "rules": {
+    "pageTitle": "游戏规则",
+    "subTitle": "了解每种模式、难度和规则",
+    "classic": {
+      "title": "经典模式",
+      "desc": "自由节奏游戏，无计时无压力",
+      "point1": "根据图片猜标题",
+      "point2": "无时间限制",
+      "point3": "无固定难度",
+      "point4": "使用按钮结束游戏并保存统计"
+    },
+    "beatClock": {
+      "title": "计时挑战",
+      "desc": "在 {min} 分钟内猜对 {count} 部电影。",
+      "diffLabel": {
+        "easy": "简单",
+        "medium": "中等",
+        "hard": "困难",
+        "master": "大师"
+      },
+      "diffLine": "{diff}：{count} 部电影，{min} 分钟"
+    },
+    "streak": {
+      "title": "最长连胜",
+      "desc": "保持连胜即可获胜",
+      "lines": {
+        "easy": "达成 {count} 连胜",
+        "medium": "连续连胜2组",
+        "hard": "连续连胜3组",
+        "master": "全部答对无错误"
+      }
+    },
+    "investigation": {
+      "title": "解谜模式",
+      "desc": "海报模糊。回答问题以显示细节。",
+      "mech1": "正确答案 = 图像变清晰",
+      "mech2": "错误答案 = 图像部分模糊",
+      "diffLine": "{diff}：{count} 题",
+      "note": "此模式将最后实现。"
+    },
+    "jokers": {
+      "title": "道具如何使用？",
+      "desc": "每种模式都有独特道具，使用次数取决于难度",
+      "btcTitle": "计时模式道具",
+      "streakTitle": "连胜模式道具",
+      "investTitle": "解谜模式道具",
+      "btcSkip": "跳过电影",
+      "btcPause": "暂停计时器10秒",
+      "btcAdd": "增加15秒计时器",
+      "btcReveal": "显示标题的一个字母",
+      "str1": "允许一次错误不中断连胜",
+      "str2": "跳过当前电影",
+      "str3": "显示一个字母",
+      "inv1": "显示一个字母",
+      "inv2": "获得问题提示",
+      "inv3": "获得一题正确答案"
+    },
+    "stats": {
+      "title": "游戏记录与统计",
+      "s1": "分数、连胜、尝试次数和时间已保存",
+      "s2": "数据本地存储在浏览器中",
+      "s3": "按分数、时间或日期排名",
+      "s4": "不会时可跳过电影"
+    },
+    "accessibility": {
+      "title": "无障碍与设置",
+      "a1": "切换浅色/深色模式",
+      "a2": "自定义字体大小和样式",
+      "a3": "开启/关闭背景音乐",
+      "a4": "屏幕阅读器和键盘导航",
+      "a5": "适合听障和视障人士的设计"
+    }
+  }
+}

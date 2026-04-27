@@ -1,0 +1,141 @@
+{
+  "home": {
+    "title": {
+      "movie": "Película",
+      "quiz": "Quiz"
+    },
+    "subtitle": "Adivina películas, contra el reloj, crea tu racha y desbloquea desafíos de cine",
+    "buttons": {
+      "play": {
+        "label": "Jugar",
+        "aria": "Iniciar el juego"
+      },
+      "rules": {
+        "label": "Reglas",
+        "aria": "Leer las reglas del juego"
+      },
+      "settings": {
+        "label": "Ajustes",
+        "aria": "Configura los ajustes"
+      }
+    }
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Seleccionar idioma",
+    "music": "Música",
+    "darkMode": "Modo oscuro",
+    "fontSize": "Cambiar tamaño de fuente",
+    "fontStyle": "Cambiar estilo de fuente",
+    "small": "Pequeña",
+    "normal": "Normal",
+    "large": "Grande"
+  },
+  "common": {
+    "back": "Volver"
+  },
+  "play": {
+    "pageTitle": "Elige tu reto",
+    "pageDescription": "Selecciona un modo de juego y dificultad para empezar una nueva partida",
+    "gameDescription": "Modo de juego",
+    "startGame": "Comenzar juego"
+  },
+  "game": {
+    "loading": "Cargando...",
+    "submit": "Enviar",
+    "skip": "Saltar",
+    "quit": "Salir",
+    "empty": "¡Ingresa tu respuesta!",
+    "perfect": "¡Perfecto!",
+    "close": "¡Cerca!",
+    "almost": "¡Casi!",
+    "wrong": "Incorrecto",
+    "answer": "Respuesta",
+    "placeholder": "Escribe tu respuesta...",
+    "correctTitle": "Elige el título correcto",
+    "instantWin": "Victoria instantánea"
+  },
+  "leaderboard": {
+    "pageTitle": "Clasificación",
+    "pageDescription": "Tus partidas guardadas",
+    "clearLeaderboard": "Limpiar clasificación",
+    "noSave": "Aún no hay partidas guardadas.",
+    "message": "Juega en modo Clásico y haz clic en \"Terminar partida y guardar\"",
+    "score": "Puntuación:",
+    "bestStreak": "Mejor racha: ",
+    "backMenu": "Volver al menú"
+  },
+  "rules": {
+    "pageTitle": "Reglas del juego",
+    "subTitle": "Conoce cada modo, dificultad y reglas",
+    "classic": {
+      "title": "Modo clásico",
+      "desc": "Juega a tu ritmo, sin reloj ni estrés",
+      "point1": "Adivina los títulos según las imágenes",
+      "point2": "Sin límite de tiempo",
+      "point3": "Sin dificultad fija",
+      "point4": "Usa el botón para finalizar la sesión y guardar estadísticas"
+    },
+    "beatClock": {
+      "title": "Contra el reloj",
+      "desc": "Compite contra el reloj para adivinar {count} películas en {min} minutos.",
+      "diffLabel": {
+        "easy": "Fácil",
+        "medium": "Medio",
+        "hard": "Difícil",
+        "master": "Maestro"
+      },
+      "diffLine": "{diff}: {count} películas en {min} minutos"
+    },
+    "streak": {
+      "title": "Racha más larga",
+      "desc": "Mantén la racha para ganar",
+      "lines": {
+        "easy": "Alcanza una racha de {count} aciertos",
+        "medium": "Gana 2 parejas seguidas",
+        "hard": "Gana 3 parejas seguidas",
+        "master": "Descubre todas las parejas sin errores"
+      }
+    },
+    "investigation": {
+      "title": "Modo investigación",
+      "desc": "El cartel está borroso. Responde preguntas para revelar detalles.",
+      "mech1": "Respuestas correctas = desdifuminar imagen",
+      "mech2": "Respuestas incorrectas = difuminar partes",
+      "diffLine": "{diff}: {count} preguntas",
+      "note": "Este modo se implementará al final."
+    },
+    "jokers": {
+      "title": "¿Cómo funcionan los comodines?",
+      "desc": "Cada modo tiene comodines únicos, usables una cantidad limitada según la dificultad",
+      "btcTitle": "Comodines Contra el Reloj",
+      "streakTitle": "Comodines Racha Larga",
+      "investTitle": "Comodines Investigación",
+      "btcSkip": "Saltar una película",
+      "btcPause": "Pausar el temporizador 10 segundos",
+      "btcAdd": "Añadir 15 segundos al temporizador",
+      "btcReveal": "Revelar una letra del título",
+      "str1": "Permitir un error sin romper la racha",
+      "str2": "Saltar la película actual",
+      "str3": "Revelar una letra",
+      "inv1": "Revelar una letra",
+      "inv2": "Obtener una pista para una pregunta",
+      "inv3": "Obtener la respuesta correcta de una pregunta"
+    },
+    "stats": {
+      "title": "Sesión de juego y estadísticas",
+      "s1": "Se guardan puntuación, racha, intentos y tiempo",
+      "s2": "Datos almacenados localmente en el navegador",
+      "s3": "Clasificación por puntuación, tiempo o fecha",
+      "s4": "Salta una película si no sabes la respuesta"
+    },
+    "accessibility": {
+      "title": "Accesibilidad y ajustes",
+      "a1": "Cambiar modo claro/oscuro",
+      "a2": "Personalizar tamaño y estilo de fuente",
+      "a3": "Encender/apagar música de fondo",
+      "a4": "Soporte completo de lector de pantalla y navegación por teclado",
+      "a5": "Diseño adaptado para sordos y personas con discapacidad visual"
+    }
+  }
+}

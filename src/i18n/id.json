@@ -1,0 +1,141 @@
+{
+  "home": {
+    "title": {
+      "movie": "Film",
+      "quiz": "Kuis"
+    },
+    "subtitle": "Tebak film, lawan waktu, buat streakmu dan buka tantangan sinema",
+    "buttons": {
+      "play": {
+        "label": "Main",
+        "aria": "Mulai permainan"
+      },
+      "rules": {
+        "label": "Aturan",
+        "aria": "Baca aturan permainan"
+      },
+      "settings": {
+        "label": "Pengaturan",
+        "aria": "Sesuaikan pengaturan"
+      }
+    }
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "language": "Pilih bahasa",
+    "music": "Musik",
+    "darkMode": "Mode gelap",
+    "fontSize": "Ubah ukuran font",
+    "fontStyle": "Ubah gaya font",
+    "small": "Kecil",
+    "normal": "Normal",
+    "large": "Besar"
+  },
+  "common": {
+    "back": "Kembali"
+  },
+  "play": {
+    "pageTitle": "Pilih Tantanganmu",
+    "pageDescription": "Pilih mode game dan kesulitan untuk memulai sesi kuis baru",
+    "gameDescription": "Mode permainan",
+    "startGame": "Mulai game"
+  },
+  "game": {
+    "loading": "Memuat...",
+    "submit": "Kirim",
+    "skip": "Lewati",
+    "quit": "Keluar",
+    "empty": "Masukkan tebakanmu!",
+    "perfect": "Sempurna!",
+    "close": "Hampir!",
+    "almost": "Sangat dekat!",
+    "wrong": "Salah",
+    "answer": "Jawaban",
+    "placeholder": "Ketik tebakanmu...",
+    "correctTitle": "Pilih judul yang benar",
+    "instantWin": "Menang Cepat"
+  },
+  "leaderboard": {
+    "pageTitle": "Papan peringkat",
+    "pageDescription": "Sesi permainan tersimpanmu",
+    "clearLeaderboard": "Bersihkan papan peringkat",
+    "noSave": "Belum ada permainan tersimpan.",
+    "message": "Mainkan mode Klasik dan klik \"Akhiri game & simpan skor\"",
+    "score": "Skor:",
+    "bestStreak": "Streak terbaik: ",
+    "backMenu": "Kembali ke Menu"
+  },
+  "rules": {
+    "pageTitle": "Aturan permainan",
+    "subTitle": "Kenali setiap mode, kesulitan dan aturan",
+    "classic": {
+      "title": "Mode klasik",
+      "desc": "Main sesuai kecepatanmu, tanpa waktu atau stres",
+      "point1": "Tebak judul berdasarkan gambar",
+      "point2": "Tanpa batas waktu",
+      "point3": "Tanpa kesulitan tetap",
+      "point4": "Gunakan tombol untuk mengakhiri sesi dan simpan statistik"
+    },
+    "beatClock": {
+      "title": "Lawan waktu",
+      "desc": "Bersainglah melawan waktu untuk menebak {count} film dalam {min} menit.",
+      "diffLabel": {
+        "easy": "Mudah",
+        "medium": "Sedang",
+        "hard": "Sulit",
+        "master": "Master"
+      },
+      "diffLine": "{diff}: {count} film dalam {min} menit"
+    },
+    "streak": {
+      "title": "Streak terpanjang",
+      "desc": "Pertahankan streakmu untuk menang",
+      "lines": {
+        "easy": "Capai streak {count} jawaban benar",
+        "medium": "Menangkan 2 pasang berturut-turut",
+        "hard": "Menangkan 3 pasang berturut-turut",
+        "master": "Temukan semua pasangan tanpa salah"
+      }
+    },
+    "investigation": {
+      "title": "Mode investigasi",
+      "desc": "Poster buram. Jawab pertanyaan untuk mengungkap detail.",
+      "mech1": "Jawaban benar = gambar kurang buram",
+      "mech2": "Jawaban salah = bagian gambar buram",
+      "diffLine": "{diff}: {count} pertanyaan",
+      "note": "Mode ini akan diimplementasikan terakhir."
+    },
+    "jokers": {
+      "title": "Bagaimana cara kerja jok?",
+      "desc": "Setiap mode memiliki jok unik, dapat digunakan beberapa kali tergantung kesulitan",
+      "btcTitle": "Jok Lawan Waktu",
+      "streakTitle": "Jok Streak Terpanjang",
+      "investTitle": "Jok Investigasi",
+      "btcSkip": "Lewati film",
+      "btcPause": "Jeda timer selama 10 detik",
+      "btcAdd": "Tambah 15 detik ke timer",
+      "btcReveal": "Tampilkan huruf judul",
+      "str1": "Izinkan satu kesalahan tanpa putus streak",
+      "str2": "Lewati film saat ini",
+      "str3": "Tampilkan huruf",
+      "inv1": "Tampilkan huruf",
+      "inv2": "Dapatkan petunjuk untuk pertanyaan",
+      "inv3": "Dapatkan jawaban benar untuk satu pertanyaan"
+    },
+    "stats": {
+      "title": "Sesi permainan dan statistik",
+      "s1": "Skor, streak, percobaan dan waktu disimpan",
+      "s2": "Data disimpan secara lokal di browser",
+      "s3": "Peringkat berdasarkan skor, waktu atau tanggal",
+      "s4": "Lewati film jika tidak tahu jawaban"
+    },
+    "accessibility": {
+      "title": "Aksesibilitas dan pengaturan",
+      "a1": "Ubah mode terang/gelap",
+      "a2": "Sesuaikan ukuran dan gaya font",
+      "a3": "Nyalakan/matikan musik latar",
+      "a4": "Dukungan penuh pembaca layar dan navigasi keyboard",
+      "a5": "Desain ramai tunarungu dan tunanetra"
+    }
+  }
+}

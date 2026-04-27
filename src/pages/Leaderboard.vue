@@ -1,44 +1,34 @@
 <template>
   <section class="leaderboard-page">
     <div class="container">
-      <h1>Leaderboard</h1>
-      <p class="subtitle">Your saved game sessions</p>
+      <h1>{{ $t('leaderboard.pageTitle') }}</h1>
+      <p class="subtitle">{{ $t('leaderboard.pageDescription') }}</p>
 
       <!-- Clear Button (only if there are scores) -->
-      <button 
-        v-if="leaderboard.length > 0"
-        class="clear-btn" 
-        @click="clearLeaderboard"
-      >
-        Clear Leaderboard
+      <button v-if="leaderboard.length > 0" class="clear-btn" @click="clearLeaderboard">
+        {{ $t('leaderboard.clearLeaderboard') }}
       </button>
 
       <!-- NO SAVED GAMES -->
       <div v-if="leaderboard.length === 0" class="empty-state">
-        <p>No saved games yet.</p>
-        <p>Play a Classic mode game and click "End Game & Save Score"</p>
+        <p>{{ $t('leaderboard.noSave') }}</p>
+        <p>{{ $t('leaderboard.message') }}</p>
       </div>
 
       <!-- SAVED GAMES LIST -->
       <div v-else class="leaderboard-list">
-        <div 
-          v-for="(entry, index) in leaderboard" 
-          :key="index" 
-          class="leaderboard-card"
-        >
+        <div v-for="(entry, index) in leaderboard" :key="index" class="leaderboard-card">
           <div class="rank">#{{ index + 1 }}</div>
           <div class="info">
             <div class="mode-badge">{{ entry.mode }} • {{ entry.difficulty }}</div>
-            <div class="score">Score: {{ entry.score }}</div>
-            <div class="streak">Best Streak: {{ entry.bestStreak }}</div>
+            <div class="score">{{ $t('leaderboard.score') }} {{ entry.score }}</div>
+            <div class="streak">{{ $t('leaderboard.bestStreak') }}{{ entry.bestStreak }}</div>
             <div class="date">{{ formatDate(entry.date) }}</div>
           </div>
         </div>
       </div>
 
-      <button class="back-btn" @click="goBack">
-        Back to Menu
-      </button>
+      <button class="back-btn" @click="goBack">{{ $t('backMenu') }}</button>
     </div>
   </section>
 </template>

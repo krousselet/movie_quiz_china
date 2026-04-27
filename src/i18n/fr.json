@@ -1,0 +1,141 @@
+{
+  "home": {
+    "title": {
+      "movie": "Film",
+      "quiz": "Quiz"
+    },
+    "subtitle": "Devine des films, bat le chronomètre, crée ta série et débloque des défis de cinéma",
+    "buttons": {
+      "play": {
+        "label": "Jouer",
+        "aria": "Commencer le jeu"
+      },
+      "rules": {
+        "label": "Règles",
+        "aria": "Lire les règles du jeu"
+      },
+      "settings": {
+        "label": "Paramètres",
+        "aria": "Ajuster les paramètres"
+      }
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": "Choix de la langue",
+    "music": "Musique",
+    "darkMode": "Mode sombre",
+    "fontSize": "Changer la taille de la police",
+    "fontStyle": "Changer le style de police",
+    "small": "Petite",
+    "normal": "Normale",
+    "large": "Grande"
+  },
+  "common": {
+    "back": "Retour"
+  },
+  "play": {
+    "pageTitle": "Choisis ton défi",
+    "pageDescription": "Sélectionne un mode de jeu et une difficulté pour commencer une nouvelle session",
+    "gameDescription": "Mode de jeu",
+    "startGame": "Commencer le jeu"
+  },
+  "game": {
+    "loading": "Chargement...",
+    "submit": "Valider",
+    "skip": "Passer",
+    "quit": "Quitter",
+    "empty": "Veuillez entrer votre réponse !",
+    "perfect": "Parfait !",
+    "close": "Presque !",
+    "almost": "Très proche !",
+    "wrong": "Faux",
+    "answer": "Réponse",
+    "placeholder": "Tapez votre réponse...",
+    "correctTitle": "Choisissez le bon titre",
+    "instantWin": "Victoire instantanée"
+  },
+  "leaderboard": {
+    "pageTitle": "Classement",
+    "pageDescription": "Tes parties sauvegardées",
+    "clearLeaderboard": "Vider le classement",
+    "noSave": "Aucune partie sauvegardée.",
+    "message": "Joue en mode Classique et clique sur \"Terminer la partie & sauvegarder\"",
+    "score": "Score :",
+    "bestStreak": "Meilleure série : ",
+    "backMenu": "Retour au menu"
+  },
+  "rules": {
+    "pageTitle": "Règles du jeu",
+    "subTitle": "Découvre chaque mode, difficulté et règle",
+    "classic": {
+      "title": "Mode classique",
+      "desc": "Joue à ton rythme, sans chronomètre ni stress",
+      "point1": "Devine les titres à partir des images",
+      "point2": "Sans limite de temps",
+      "point3": "Sans difficulté fixe",
+      "point4": "Utilise le bouton pour terminer la session et sauvegarder les statistiques"
+    },
+    "beatClock": {
+      "title": "Contre la montre",
+      "desc": "Affronte le chronomètre pour deviner {count} films en {min} minutes.",
+      "diffLabel": {
+        "easy": "Facile",
+        "medium": "Moyen",
+        "hard": "Difficile",
+        "master": "Expert"
+      },
+      "diffLine": "{diff} : {count} films en {min} minutes"
+    },
+    "streak": {
+      "title": "Plus grande série",
+      "desc": "Garde ta série pour gagner",
+      "lines": {
+        "easy": "Atteins une série de {count} bonnes réponses",
+        "medium": "Gagne 2 paires d'affilée",
+        "hard": "Gagne 3 paires d'affilée",
+        "master": "Trouve toutes les paires sans erreur"
+      }
+    },
+    "investigation": {
+      "title": "Mode investigation",
+      "desc": "L'affiche est floue. Réponds aux questions pour révéler des détails.",
+      "mech1": "Bonnes réponses = image moins floue",
+      "mech2": "Mauvaises réponses = partie de l'image floue",
+      "diffLine": "{diff} : {count} questions",
+      "note": "Ce mode sera implémenté en dernier."
+    },
+    "jokers": {
+      "title": "Comment fonctionnent les jokers ?",
+      "desc": "Chaque mode a des jokers uniques, utilisables un certain nombre de fois selon la difficulté",
+      "btcTitle": "Jokers Contre la Montre",
+      "streakTitle": "Jokers Plus Grande Série",
+      "investTitle": "Jokers Investigation",
+      "btcSkip": "Passer un film",
+      "btcPause": "Mettre le chronomètre en pause pendant 10 secondes",
+      "btcAdd": "Ajouter 15 secondes au chronomètre",
+      "btcReveal": "Révéler une lettre du titre",
+      "str1": "Autoriser une erreur sans casser la série",
+      "str2": "Passer le film actuel",
+      "str3": "Révéler une lettre",
+      "inv1": "Révéler une lettre",
+      "inv2": "Obtenir un indice pour une question",
+      "inv3": "Obtenir la réponse correcte pour une question"
+    },
+    "stats": {
+      "title": "Session de jeu et statistiques",
+      "s1": "Score, série, tentatives et temps sont sauvegardés",
+      "s2": "Données stockées localement dans le navigateur",
+      "s3": "Classement par score, temps ou date",
+      "s4": "Passe un film si tu ne connais pas la réponse"
+    },
+    "accessibility": {
+      "title": "Accessibilité et paramètres",
+      "a1": "Activer/désactiver le mode sombre/clair",
+      "a2": "Personnaliser la taille et le style de police",
+      "a3": "Activer/désactiver la musique de fond",
+      "a4": "Prise en charge complète du lecteur d'écran et de la navigation clavier",
+      "a5": "Design adapté aux malentendants et malvoyants"
+    }
+  }
+}
