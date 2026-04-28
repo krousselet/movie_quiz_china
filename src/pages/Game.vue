@@ -140,8 +140,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, provide } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n' // ⬅️ ADD THIS
-const { t } = useI18n() // ⬅️ ADD THIS
+import { useI18n } from 'vue-i18n' // ⬅️ THIS IS NEEDED
 
 // UI
 import '@/components/game/ui/game-ui.css'
@@ -158,6 +157,9 @@ import { useAnswerChecker } from '@/composables/game/useAnswerChecker'
 import { useJokers } from '@/composables/useJokers'
 import { useGameTimer } from '@/composables/useGameTimer'
 import { useGameWinCondition } from '@/composables/useGameWinCondition'
+
+// ✅ FIXED: i18n properly defined
+const { t, locale } = useI18n()
 
 const route = useRoute()
 const router = useRouter()
@@ -311,9 +313,11 @@ const endSession = () => {
   router.push('/')
 }
 
+// ✅ FIXED: CORRECT onMounted WITH LANGUAGE
 onMounted(async () => {
   isLoading.value = true
-  // ✅ PASS LANGUAGE HERE
+
+  // ✅ Pass current language to TMDB (FIXES API + IMAGES)
   const movies = await tmdb.getRandomMovies(20, locale.value)
 
   movieList.value = movies
