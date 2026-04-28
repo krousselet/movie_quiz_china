@@ -313,7 +313,9 @@ const endSession = () => {
 
 onMounted(async () => {
   isLoading.value = true
-  const movies = await tmdb.getRandomMovies()
+  // ✅ PASS LANGUAGE HERE
+  const movies = await tmdb.getRandomMovies(20, locale.value)
+
   movieList.value = movies
   currentMovie.value = movies[0] || null
 
