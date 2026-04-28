@@ -1,5 +1,4 @@
-// src/composables/game/useGameLogic.ts
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 
 export function useGameLogic() {
   const score = ref(0)
@@ -12,7 +11,10 @@ export function useGameLogic() {
   const currentMovie = ref(null)
   const movieList = ref([])
 
-  // ✅ Fixed: added :number type
+  // Inject protection from jokers
+  const streakProtected = inject('streakProtected', ref(false))
+  const consumeStreakProtection = inject('consumeStreakProtection', () => {})
+
   const addScore = (points: number) => {
     score.value += points
   }
@@ -24,7 +26,12 @@ export function useGameLogic() {
     }
   }
 
+  // ✅ FIXED: Respect streak protection
   const breakStreak = () => {
+    if (streakProtected.value) {
+      consumeStreakProtection()
+      return
+    }
     streak.value = 0
   }
 

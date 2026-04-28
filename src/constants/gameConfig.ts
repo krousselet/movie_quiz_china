@@ -44,3 +44,9 @@ export const TIMER_EFFECTS = {
     hard: 5,
   },
 }
+
+export const STREAK_WIN_CONFIG = {
+  easy: 10,
+  medium: 15,
+  hard: 25,
+}

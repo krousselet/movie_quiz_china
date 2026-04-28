@@ -1,4 +1,3 @@
-// ✅ FIXED: Added ref to the import
 import { reactive, ref } from 'vue'
 import { JOKER_BASE_LIMITS, TIMER_EFFECTS } from '@/constants/gameConfig'
 import type { Movie } from '@/types/game.types'
@@ -49,7 +48,7 @@ export function useJokers() {
     Object.assign(jokers, { ...JOKER_BASE_LIMITS })
   }
 
-  // Protect streak: ignore next wrong answer
+  // Protect streak
   const streakProtected = ref(false)
 
   const useProtectStreak = () => {
@@ -58,14 +57,17 @@ export function useJokers() {
     streakProtected.value = true
   }
 
-  // Instant win = auto correct answer
+  // ✅ FIXED: Reset after use
+  const consumeStreakProtection = () => {
+    streakProtected.value = false
+  }
+
   const useInstantWin = (onApply: () => void) => {
     if (jokers.instantWin <= 0) return
     jokers.instantWin--
     onApply()
   }
 
-  // Expose
   return {
     jokers,
     streakProtected,
@@ -75,6 +77,7 @@ export function useJokers() {
     useStopTimer,
     useAddTime,
     useProtectStreak,
+    consumeStreakProtection, // ✅ NEW
     useInstantWin,
     resetJokers,
   }
