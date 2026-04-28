@@ -11,7 +11,6 @@ export class MovieQuiz {
   public session: GameSession | null = null
 
   constructor() {
-    // Dependency injection (clean OOP)
     this.tmdb = new TMDBService()
     this.storage = new StorageService()
     this.security = new SecurityService()
@@ -20,7 +19,7 @@ export class MovieQuiz {
   // Initialize new game session
   public async startSession(mode: GameMode, difficulty: Difficulty): Promise<void> {
     const movies = await this.tmdb.getRandomMovies(25)
-    const secureMovies = this.security.obscureMovieTitles(movies) // Anti-cheat
+    const secureMovies = this.security.obscureMovieTitles(movies)
 
     this.session = {
       id: Date.now().toString(),
@@ -39,10 +38,14 @@ export class MovieQuiz {
     }
   }
 
-  // Check answer (secure, no client-side title exposure)
+  // ✅ FIXED: Optional chaining + null check
   public checkAnswer(userInput: string): boolean {
     if (!this.session) return false
+
     const currentMovie = this.session.movies[this.session.currentIndex]
+    // ✅ SAFE ACCESS — no more TS error
+    if (!currentMovie) return false
+
     return this.security.verifyAnswer(userInput, currentMovie.originalTitle)
   }
 
