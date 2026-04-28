@@ -51,18 +51,20 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
 const mobileMenuOpen = ref(false)
 
-// All your official pages
-const navItems = ref([
-  { path: '/', label: 'Home' },
-  { path: '/play', label: 'Play' },
-  { path: '/leaderboard', label: 'Leaderboard' },
-  { path: '/rules', label: 'Rules' },
-  { path: '/settings', label: 'Settings' },
+const { t, locale } = useI18n()
+
+const navItems = computed(() => [
+  { path: '/', label: t('navigation.home') },
+  { path: '/play', label: t('navigation.play') },
+  { path: '/leaderboard', label: t('navigation.leaderboard') },
+  { path: '/rules', label: t('navigation.rules') },
+  { path: '/settings', label: t('navigation.settings') },
 ])
 </script>
 

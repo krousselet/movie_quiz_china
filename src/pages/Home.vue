@@ -1,157 +1,120 @@
 <template>
-  <section class="home-page" aria-labelledby="home-title">
-    <div class="cinema-overlay"></div>
+  <section class="home-page">
+    <div class="overlay"></div>
 
-    <div class="home-content">
-      <header class="home-header">
-        <h1 id="home-title" class="main-title">
-          <span class="title-first">{{ $t('home.title.movie') }}</span>
-          <span class="title-second">{{ $t('home.title.quiz') }}</span>
-        </h1>
-        <p class="subtitle">
-          {{ $t('home.subtitle') }}
-        </p>
-      </header>
+    <div class="content">
+      <h1 class="title">
+        <span>Movie</span>
+        <span class="gold">Quiz</span>
+      </h1>
+      <p class="subtitle">{{ t('home.subtitle') }}</p>
 
-      <div class="divider">❖ ❖ ❖</div>
-
-      <div class="home-actions">
-        <router-link to="/play" class="btn btn-primary">
-          {{ $t('home.buttons.play.label') }}
-        </router-link>
-
-        <router-link to="/rules" class="btn btn-secondary">
-          {{ $t('home.buttons.rules.label') }}
-        </router-link>
-
-        <router-link to="/leaderboard" class="btn btn-tertiary">
-          Leaderboard
-        </router-link>
+      <div class="actions">
+        <button @click="go('/play')" class="btn primary">
+          {{ t('home.buttons.play.label') }}
+        </button>
+        <button @click="go('/rules')" class="btn secondary">
+          {{ t('navigation.rules') }}
+        </button>
+        <button @click="go('/leaderboard')" class="btn tertiary">
+          {{ t('navigation.leaderboard') }}
+        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { useSound } from '@/composables/useSound'
+
+const router = useRouter()
+const { t } = useI18n()
+const { playClick } = useSound()
+
+const go = (path: string) => {
+  playClick()
+  router.push(path)
+}
 </script>
 
 <style scoped lang="scss">
-/* YOUR ORIGINAL STYLES - NO CHANGES */
 .home-page {
-  min-height: 100vh;
-  width: 100%;
+  position: fixed;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  padding: 2rem 1rem;
   background: var(--bg-primary);
+  overflow: hidden !important;
+  z-index: 1;
 }
 
-.cinema-overlay {
+.overlay {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(207, 168, 88, 0.08) 1px, transparent 1px);
-  background-size: 30px 30px;
-  animation: slowPan 25s linear infinite;
+  background: radial-gradient(circle at center, rgba(207, 168, 88, 0.04) 0%, transparent 70%);
   pointer-events: none;
 }
 
-@keyframes slowPan {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 100% 100%; }
-}
-
-.home-content {
-  text-align: center;
+.content {
   z-index: 2;
-  max-width: 900px;
-  width: 100%;
+  text-align: center;
+  max-width: 700px;
+  width: 90%;
 }
 
-.main-title {
-  font-size: clamp(2.8rem, 8vw, 5.5rem);
-  letter-spacing: 0.3em;
+.title {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
   margin-bottom: 1rem;
 
-  .title-first {
-    color: var(--text-secondary);
-    font-weight: 300;
-  }
-  .title-second {
+  .gold {
     color: var(--cinema-gold);
-    font-weight: 700;
-    margin-left: 0.2em;
-    text-shadow: 0 0 12px rgba(207, 168, 88, 0.35);
   }
 }
 
 .subtitle {
-  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto 2rem;
   line-height: 1.6;
+  margin-bottom: 2rem;
 }
 
-.divider {
-  color: var(--cinema-gold);
-  opacity: 0.65;
-  font-size: 1.2rem;
-  margin: 2.5rem 0;
-  letter-spacing: 0.8em;
-}
-
-.home-actions {
+.actions {
   display: flex;
-  gap: 1.2rem;
+  gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .btn {
   padding: 0.9rem 2.2rem;
-  border-radius: 2px;
-  text-decoration: none;
+  border-radius: 6px;
   font-size: 1rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  transition: all 0.4s ease;
-  border: 1px solid transparent;
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-3px);
-  }
-}
-
-.btn-primary {
-  background: var(--cinema-gold);
-  color: #000;
   font-weight: 600;
+  transition: all 0.2s ease;
 
   &:hover {
-    box-shadow: 0 0 18px rgba(207, 168, 88, 0.5);
+    transform: translateY(-2px);
   }
 }
 
-.btn-secondary {
+.primary {
+  background: var(--cinema-gold);
+  color: #111;
+}
+
+.secondary {
   background: transparent;
-  border-color: var(--cinema-text-muted);
+  border: 1px solid var(--border-color);
   color: var(--text-primary);
-
-  &:hover {
-    border-color: var(--cinema-gold);
-    box-shadow: 0 0 12px rgba(207, 168, 88, 0.25);
-  }
 }
 
-.btn-tertiary {
+.tertiary {
   background: transparent;
   color: var(--text-secondary);
-
-  &:hover {
-    color: var(--cinema-gold);
-  }
 }
 </style>

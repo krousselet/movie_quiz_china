@@ -1,8 +1,8 @@
 <template>
   <section class="play-page">
     <div class="play-container">
-      <h1 class="play-title">{{ t('play.title') }}</h1>
-      <p class="play-sub">{{ t('play.chooseMode') }}</p>
+      <h1 class="play-title">{{ t('play.pageTitle') }}</h1>
+      <p class="play-sub">{{ t('play.pageDescription') }}</p>
 
       <!-- GAME MODES (TRANSLATED) -->
       <div class="mode-grid">

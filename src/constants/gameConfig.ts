@@ -31,7 +31,7 @@ export const WIN_SCORE_CONFIG = {
   hard: 1000,
 }
 
-// ✅ NEW: Timer effects per difficulty
+// Timer effects per difficulty
 export const TIMER_EFFECTS = {
   stopDuration: {
     easy: 5,

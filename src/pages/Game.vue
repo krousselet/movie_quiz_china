@@ -2,7 +2,7 @@
   <section class="game-page">
     <div class="cinema-overlay"></div>
 
-    <div v-if="isLoading" class="loading">{{ $t('game.loading') }}</div>
+    <div v-if="isLoading" class="loading">{{ t('game.loading') }}</div>
 
     <div class="game-container" v-else>
       <!-- STATS -->
@@ -32,13 +32,13 @@
           :is-disabled="jokers.revealLetter <= 0"
           @click="handleRevealLetter"
         >
-          {{ $t('rules.jokers.btcReveal') }} ({{ jokers.revealLetter }})
+          {{ t('rules.jokers.btcReveal') }} ({{ jokers.revealLetter }})
         </GameButton>
 
         <!-- CLASSIC -->
         <template v-if="mode === 'classic'">
           <GameButton variant="joker" :is-disabled="jokers.skip <= 0" @click="handleAutoCorrect">
-            {{ $t('rules.jokers.str2') }} ({{ jokers.skip }})
+            {{ t('rules.jokers.str2') }} ({{ jokers.skip }})
           </GameButton>
 
           <GameButton variant="joker" :is-disabled="jokers.fiftyFifty <= 0" @click="openFiftyFifty">
@@ -49,16 +49,16 @@
         <!-- BEAT THE CLOCK -->
         <template v-else-if="mode === 'beat-the-clock'">
           <GameButton variant="joker" :is-disabled="jokers.skip <= 0" @click="useSkip(nextMovie)">
-            {{ $t('rules.jokers.btcSkip') }} ({{ jokers.skip }})
+            {{ t('rules.jokers.btcSkip') }} ({{ jokers.skip }})
           </GameButton>
 
           <GameButton variant="joker" :is-disabled="jokers.stopTimer <= 0" @click="handleStopTimer">
-            {{ $t('rules.jokers.btcPause', { secPause: 10 }) }}
+            {{ t('rules.jokers.btcPause', { secPause: 10 }) }}
             ({{ jokers.stopTimer }})
           </GameButton>
 
           <GameButton variant="joker" :is-disabled="jokers.addTime <= 0" @click="handleAddTime">
-            {{ $t('rules.jokers.btcAdd', { secAdd: 15 }) }}
+            {{ t('rules.jokers.btcAdd', { secAdd: 15 }) }}
             ({{ jokers.addTime }})
           </GameButton>
         </template>
@@ -66,7 +66,7 @@
         <!-- LONGEST STREAK -->
         <template v-else-if="mode === 'longest-streak'">
           <GameButton variant="joker" :is-disabled="jokers.skip <= 0" @click="useSkip(nextMovie)">
-            {{ $t('rules.jokers.str2') }} ({{ jokers.skip }})
+            {{ t('rules.jokers.str2') }} ({{ jokers.skip }})
           </GameButton>
 
           <GameButton
@@ -74,7 +74,7 @@
             :is-disabled="jokers.protectStreak <= 0"
             @click="handleProtectStreak"
           >
-            {{ $t('rules.jokers.str1') }} ({{ jokers.protectStreak }})
+            {{ t('rules.jokers.str1') }} ({{ jokers.protectStreak }})
           </GameButton>
 
           <GameButton
@@ -82,7 +82,7 @@
             :is-disabled="jokers.instantWin <= 0"
             @click="handleInstantWin"
           >
-            {{ $t('game.instantWin') }} ({{ jokers.instantWin }})
+            {{ t('game.instantWin') }} ({{ jokers.instantWin }})
           </GameButton>
         </template>
       </div>
@@ -92,34 +92,49 @@
         <input
           v-model="userAnswer"
           @keyup.enter="checkAnswer"
-          :placeholder="$t('game.placeholder')"
+          :placeholder="t('game.placeholder')"
           class="answer-input"
           :class="{ error: showError }"
         />
         <GameButton variant="submit" @click="checkAnswer">
-          {{ $t('game.submit') }}
+          {{ t('game.submit') }}
+        </GameButton>
+
+        <!-- 🔥 END GAME + QUIT BUTTONS MOVED HERE (CLASSIC ONLY) -->
+        <GameButton v-if="mode === 'classic'" variant="success" @click="endClassicGame">
+          {{ t('game.endClassic') }}
+        </GameButton>
+
+        <GameButton variant="danger" @click="endSession">
+          {{ t('game.quit') }}
         </GameButton>
       </div>
 
-      <p v-if="showError" class="error-text">{{ $t('game.empty') }}</p>
+      <p v-if="showError" class="error-text">{{ t('game.empty') }}</p>
 
       <!-- FEEDBACK -->
       <div class="feedback" :class="feedbackType">
-        <span v-if="feedbackType === 'perfect'">{{ $t('game.perfect') }}</span>
-        <span v-else-if="feedbackType === 'close'">{{ $t('game.close') }}</span>
-        <span v-else-if="feedbackType === 'almost'">{{ $t('game.almost') }}</span>
+        <span v-if="feedbackType === 'perfect'">{{ t('game.perfect') }}</span>
+        <span v-else-if="feedbackType === 'close'">{{ t('game.close') }}</span>
+        <span v-else-if="feedbackType === 'almost'">{{ t('game.almost') }}</span>
         <span v-else-if="feedbackType === 'wrong'">
-          {{ $t('game.wrong') }}! {{ $t('game.answer') }}: {{ correctAnswer }}
+          {{ t('game.wrong') }}! {{ t('game.answer') }}: {{ correctAnswer }}
         </span>
       </div>
 
       <!-- ACTION BUTTONS -->
       <div class="button-row">
         <GameButton variant="skip" @click="nextMovie">
-          {{ $t('game.skip') }}
+          {{ t('game.skip') }}
         </GameButton>
+
+        <!-- END BUTTON -->
+        <GameButton v-if="mode === 'classic'" variant="success" @click="endClassicGame">
+          {{ t('game.endClassic') }}
+        </GameButton>
+
         <GameButton variant="danger" @click="endSession">
-          {{ $t('game.quit') }}
+          {{ t('game.quit') }}
         </GameButton>
       </div>
     </div>
@@ -127,7 +142,7 @@
     <!-- 50/50 MODAL -->
     <div v-if="showFiftyModal" class="modal-overlay">
       <div class="modal-card">
-        <h3>{{ $t('game.correctTitle') }}</h3>
+        <h3>{{ t('game.correctTitle') }}</h3>
         <div class="choices">
           <GameButton variant="choice" @click="choose(option1)">{{ option1 }}</GameButton>
           <GameButton variant="choice" @click="choose(option2)">{{ option2 }}</GameButton>
@@ -140,7 +155,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, provide } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n' // ⬅️ THIS IS NEEDED
+import { useI18n } from 'vue-i18n'
 
 // UI
 import '@/components/game/ui/game-ui.css'
@@ -158,15 +173,15 @@ import { useJokers } from '@/composables/useJokers'
 import { useGameTimer } from '@/composables/useGameTimer'
 import { useGameWinCondition } from '@/composables/useGameWinCondition'
 
-// ✅ FIXED: i18n properly defined
 const { t, locale } = useI18n()
-
 const route = useRoute()
 const router = useRouter()
 const tmdb = new TMDBService()
 
-const mode = ref(route.query.mode || 'classic')
-const difficulty = ref(route.query.difficulty || 'easy')
+// 🔥 FIXED: Reactive mode (works in template!)
+const mode = ref('')
+const difficulty = ref('')
+
 const userAnswer = ref('')
 const showError = ref(false)
 const showFiftyModal = ref(false)
@@ -220,14 +235,12 @@ const formattedTime = computed(() => {
 // ------------------------------
 const nextMovie = () => {
   if (!movieList.value || movieList.value.length === 0) return
-
   isSkipping.value = true
 
   setTimeout(() => {
     const currentId = currentMovie.value?.id
     const index = movieList.value.findIndex((m) => m.id === currentId)
     const nextIndex = (index + 1) % movieList.value.length
-
     currentMovie.value = movieList.value[nextIndex] || null
 
     if (currentMovie.value) {
@@ -306,18 +319,37 @@ const handleInstantWin = () =>
   })
 
 // ------------------------------
-// SESSION
+// SESSION & END GAME
 // ------------------------------
 const endSession = () => {
   timer.clearTimer()
   router.push('/')
 }
 
-// ✅ FIXED: CORRECT onMounted WITH LANGUAGE
-onMounted(async () => {
-  isLoading.value = true
+const endClassicGame = () => {
+  const finalStats = {
+    score: score.value,
+    streak: streak.value,
+    difficulty: difficulty.value,
+    mode: 'classic',
+    date: new Date().toISOString(),
+    locale: locale.value,
+  }
 
-  // ✅ Pass current language to TMDB (FIXES API + IMAGES)
+  const existing = JSON.parse(localStorage.getItem('leaderboard') || '[]')
+  existing.push(finalStats)
+  existing.sort((a, b) => b.score - a.score)
+  localStorage.setItem('leaderboard', JSON.stringify(existing.slice(0, 100)))
+
+  router.push('/leaderboard')
+}
+
+// 🔥 FIXED: Correctly init mode ON MOUNT
+onMounted(async () => {
+  mode.value = route.query.mode || 'classic'
+  difficulty.value = route.query.difficulty || 'easy'
+
+  isLoading.value = true
   const movies = await tmdb.getRandomMovies(20, locale.value)
 
   movieList.value = movies

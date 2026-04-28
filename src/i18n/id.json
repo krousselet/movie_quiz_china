@@ -1,4 +1,11 @@
 {
+  "navigation": {
+    "home": "Beranda",
+    "play": "Main",
+    "leaderboard": "Papan Peringkat",
+    "rules": "Aturan",
+    "settings": "Pengaturan"
+  },
   "home": {
     "title": {
       "movie": "Film",
@@ -38,7 +45,8 @@
     "pageTitle": "Pilih Tantanganmu",
     "pageDescription": "Pilih mode game dan kesulitan untuk memulai sesi kuis baru",
     "gameDescription": "Mode permainan",
-    "startGame": "Mulai game"
+    "startGame": "Mulai game",
+    "chooseDifficulty": "Pilih tingkat kesulitan"
   },
   "game": {
     "loading": "Memuat...",
@@ -53,7 +61,8 @@
     "answer": "Jawaban",
     "placeholder": "Ketik tebakanmu...",
     "correctTitle": "Pilih judul yang benar",
-    "instantWin": "Menang Cepat"
+    "instantWin": "Menang Cepat",
+    "endClassic": "Akhiri permainan"
   },
   "leaderboard": {
     "pageTitle": "Papan peringkat",
@@ -61,7 +70,8 @@
     "clearLeaderboard": "Bersihkan papan peringkat",
     "noSave": "Belum ada permainan tersimpan.",
     "message": "Mainkan mode Klasik dan klik \"Akhiri game & simpan skor\"",
-    "score": "Skor:",
+    "score": "Skor",
+    "streak": "Beruntun",
     "bestStreak": "Streak terbaik: ",
     "backMenu": "Kembali ke Menu"
   },

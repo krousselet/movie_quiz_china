@@ -1,6 +1,15 @@
-@import "./transition.scss";
+@import './transition.scss';
 
-/* Light Mode (default) */
+html,
+body {
+  height: 100vh !important;
+  overflow: hidden !important;
+  position: fixed !important;
+  inset: 0 !important;
+}
+/* ------------------------------- */
+/* LIGHT MODE (your existing) */
+/* ------------------------------- */
 html {
   --bg-primary: #f8f5f0;
   --bg-secondary: #ffffff;
@@ -9,33 +18,89 @@ html {
   --cinema-gold: #cfa858;
   --cinema-red: #7b1010;
   --border-color: rgba(0, 0, 0, 0.1);
+
+  /* Netflix-style extras */
+  --card-radius: 12px;
+  --btn-radius: 6px;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
 }
 
-/* Dark Mode (triggered by class="dark") */
+/* ------------------------------- */
+/* DARK MODE — NETFLIX CINEMATIC */
+/* ------------------------------- */
 html.dark {
-  --bg-primary: #0f0f14;
-  --bg-secondary: #1c1c26;
+  --bg-primary: #0b0b0f;
+  --bg-secondary: #141419;
   --text-primary: #f0e9e0;
-  --text-secondary: #b9b2a9;
-  --border-color: rgba(207, 168, 88, 0.15);
+  --text-secondary: #9ca3af;
+  --border-color: rgba(207, 168, 88, 0.12);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* ------------------------------- */
+/* GLOBAL RESET & BASE */
+/* ------------------------------- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
+  height: 100vh;
   min-height: 100vh;
   background-color: var(--bg-primary) !important;
   color: var(--text-primary) !important;
-  font-family: 'Segoe UI', serif;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+  scroll-behavior: smooth;
 }
 
-input, button, select, textarea {
+/* HIDE SCROLLBARS BUT KEEP FUNCTIONALITY */
+body::-webkit-scrollbar {
+  display: none;
+}
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+input,
+button,
+select,
+textarea {
   font-family: inherit;
   color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* PAGE TRANSITION (Netflix smooth) */
+.page-enter-active,
+.page-leave-active {
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: scale(0.98);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: scale(1.02);
 }

@@ -1,4 +1,11 @@
 {
+  "navigation": {
+    "home": "主页",
+    "play": "开始游戏",
+    "leaderboard": "排行榜",
+    "rules": "规则",
+    "settings": "设置"
+  },
   "home": {
     "title": {
       "movie": "电影",
@@ -38,7 +45,8 @@
     "pageTitle": "选择你的挑战",
     "pageDescription": "选择游戏模式和难度开始新的测验",
     "gameDescription": "游戏模式",
-    "startGame": "开始游戏"
+    "startGame": "开始游戏",
+    "chooseDifficulty": "选择难度"
   },
   "game": {
     "loading": "加载中...",
@@ -53,7 +61,8 @@
     "answer": "正确答案",
     "placeholder": "输入你的猜测...",
     "correctTitle": "选择正确的电影名",
-    "instantWin": "直接获胜"
+    "instantWin": "直接获胜",
+    "endClassic": "结束游戏"
   },
   "leaderboard": {
     "pageTitle": "排行榜",
@@ -61,7 +70,8 @@
     "clearLeaderboard": "清空排行榜",
     "noSave": "暂无保存的游戏。",
     "message": "游玩经典模式并点击“结束游戏并保存分数”",
-    "score": "分数：",
+    "score": "分数",
+    "streak": "连胜",
     "bestStreak": "最佳连胜：",
     "backMenu": "返回菜单"
   },

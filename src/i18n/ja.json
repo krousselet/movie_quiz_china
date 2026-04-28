@@ -1,4 +1,11 @@
 {
+  "navigation": {
+    "home": "ホーム",
+    "play": "プレイ",
+    "leaderboard": "ランキング",
+    "rules": "ルール",
+    "settings": "設定"
+  },
   "home": {
     "title": {
       "movie": "映画",
@@ -38,7 +45,8 @@
     "pageTitle": "チャレンジを選択",
     "pageDescription": "ゲームモードと難易度を選んで新しいクイズを開始",
     "gameDescription": "ゲームモード",
-    "startGame": "ゲーム開始"
+    "startGame": "ゲーム開始",
+    "chooseDifficulty": "難易度を選択"
   },
   "game": {
     "loading": "読み込み中...",
@@ -53,7 +61,8 @@
     "answer": "答え",
     "placeholder": "答えを入力...",
     "correctTitle": "正しいタイトルを選択",
-    "instantWin": "即時勝利"
+    "instantWin": "即時勝利",
+    "endClassic": "ゲームを終了"
   },
   "leaderboard": {
     "pageTitle": "ランキング",
@@ -61,7 +70,8 @@
     "clearLeaderboard": "ランキングをクリア",
     "noSave": "保存された記録はありません。",
     "message": "クラシックモードでプレイし「ゲーム終了＆スコア保存」をクリック",
-    "score": "スコア：",
+    "score": "スコア",
+    "streak": "連続",
     "bestStreak": "最高連続正解： ",
     "backMenu": "メニューに戻る"
   },

@@ -1,4 +1,11 @@
 {
+  "navigation": {
+    "home": "Accueil",
+    "play": "Jouer",
+    "leaderboard": "Classement",
+    "rules": "Règles",
+    "settings": "Paramètres"
+  },
   "home": {
     "title": {
       "movie": "Film",
@@ -38,7 +45,8 @@
     "pageTitle": "Choisis ton défi",
     "pageDescription": "Sélectionne un mode de jeu et une difficulté pour commencer une nouvelle session",
     "gameDescription": "Mode de jeu",
-    "startGame": "Commencer le jeu"
+    "startGame": "Commencer le jeu",
+    "chooseDifficulty": "Choisissez la difficulté"
   },
   "game": {
     "loading": "Chargement...",
@@ -53,7 +61,8 @@
     "answer": "Réponse",
     "placeholder": "Tapez votre réponse...",
     "correctTitle": "Choisissez le bon titre",
-    "instantWin": "Victoire instantanée"
+    "instantWin": "Victoire instantanée",
+    "endClassic": "Terminer la partie"
   },
   "leaderboard": {
     "pageTitle": "Classement",
@@ -61,7 +70,8 @@
     "clearLeaderboard": "Vider le classement",
     "noSave": "Aucune partie sauvegardée.",
     "message": "Joue en mode Classique et clique sur \"Terminer la partie & sauvegarder\"",
-    "score": "Score :",
+    "score": "Score",
+    "streak": "Série",
     "bestStreak": "Meilleure série : ",
     "backMenu": "Retour au menu"
   },

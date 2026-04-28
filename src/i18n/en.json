@@ -1,4 +1,11 @@
 {
+  "navigation": {
+    "home": "Home",
+    "play": "Play",
+    "leaderboard": "Leaderboard",
+    "rules": "Rules",
+    "settings": "Settings"
+  },
   "home": {
     "title": {
       "movie": "Movie",
@@ -38,7 +45,8 @@
     "pageTitle": "Choose Your Challenge",
     "pageDescription": "Select a game mode & difficulty to start a new quiz session",
     "gameDescription": "Game Mode",
-    "startGame": "Start game"
+    "startGame": "Start game",
+    "chooseDifficulty": "Choose the difficulty"
   },
   "game": {
     "loading": "Loading...",
@@ -53,7 +61,8 @@
     "answer": "Answer",
     "placeholder": "Type your guess...",
     "correctTitle": "Choose the correct title",
-    "instantWin": "Instant Win"
+    "instantWin": "Instant Win",
+    "endClassic": "End game"
   },
   "leaderboard": {
     "pageTitle": "Leaderboard",
@@ -61,7 +70,8 @@
     "clearLeaderboard": "Clear Leaderboard",
     "noSave": "No saved games yet.",
     "message": "Play a Classic mode game and click \"End Game & Save Score\"",
-    "score": "Score:",
+    "score": "Score",
+    "streak": "Streak",
     "bestStreak": "Best Streak: ",
     "backMenu": "Back to Menu"
   },

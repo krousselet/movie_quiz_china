@@ -3,8 +3,8 @@
     <div class="stat warning" v-if="showTimer">
       {{ time }}
     </div>
-    <div class="stat">Score: {{ score }}</div>
-    <div class="stat">Streak: {{ streak }}</div>
+    <div class="stat">{{ $t('leaderboard.score') }} : {{ score }}</div>
+    <div class="stat">{{ $t('leaderboard.streak') }} : {{ streak }}</div>
   </div>
 </template>
 

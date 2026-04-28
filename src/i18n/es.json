@@ -1,4 +1,11 @@
 {
+  "navigation": {
+    "home": "Inicio",
+    "play": "Jugar",
+    "leaderboard": "Clasificación",
+    "rules": "Reglas",
+    "settings": "Ajustes"
+  },
   "home": {
     "title": {
       "movie": "Película",
@@ -38,7 +45,8 @@
     "pageTitle": "Elige tu reto",
     "pageDescription": "Selecciona un modo de juego y dificultad para empezar una nueva partida",
     "gameDescription": "Modo de juego",
-    "startGame": "Comenzar juego"
+    "startGame": "Comenzar juego",
+    "chooseDifficulty": "Elige la dificultad"
   },
   "game": {
     "loading": "Cargando...",
@@ -53,7 +61,8 @@
     "answer": "Respuesta",
     "placeholder": "Escribe tu respuesta...",
     "correctTitle": "Elige el título correcto",
-    "instantWin": "Victoria instantánea"
+    "instantWin": "Victoria instantánea",
+    "endClassic": "Terminar partida"
   },
   "leaderboard": {
     "pageTitle": "Clasificación",
@@ -61,7 +70,8 @@
     "clearLeaderboard": "Limpiar clasificación",
     "noSave": "Aún no hay partidas guardadas.",
     "message": "Juega en modo Clásico y haz clic en \"Terminar partida y guardar\"",
-    "score": "Puntuación:",
+    "score": "Puntuación",
+    "streak": "Racha",
     "bestStreak": "Mejor racha: ",
     "backMenu": "Volver al menú"
   },

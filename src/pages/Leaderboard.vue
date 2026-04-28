@@ -27,8 +27,6 @@
           </div>
         </div>
       </div>
-
-      <button class="back-btn" @click="goBack">{{ $t('backMenu') }}</button>
     </div>
   </section>
 </template>
