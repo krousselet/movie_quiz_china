@@ -1,4 +1,7 @@
 {
+  "app": {
+    "title": "Memory Quiz"
+  },
   "navigation": {
     "home": "Inicio",
     "play": "Jugar",

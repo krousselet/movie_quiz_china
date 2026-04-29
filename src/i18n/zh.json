@@ -1,4 +1,7 @@
 {
+  "app": {
+    "title": "记忆测验"
+  },
   "navigation": {
     "home": "主页",
     "play": "开始游戏",

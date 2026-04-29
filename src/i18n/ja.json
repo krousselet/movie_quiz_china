@@ -1,4 +1,7 @@
 {
+  "app": {
+    "title": "メモリークイズ"
+  },
   "navigation": {
     "home": "ホーム",
     "play": "プレイ",
