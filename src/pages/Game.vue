@@ -369,28 +369,62 @@ const endSession = () => {
 
 // REPLACE YOUR ENTIRE endClassicGame() WITH THIS
 const endClassicGame = () => {
-  const stats = {
-    score: score.value,
-    bestStreak: maxStreak.value,
-    difficulty: difficulty.value,
-    mode: mode.value,
-    date: new Date().toISOString(),
-    durationSeconds: timer.totalSeconds.value, // ⏱ TIME PLAYED
-    jokersUsed: {
-      revealLetter: jokers.revealLetterInitial - jokers.revealLetter,
-      skip: jokers.skipInitial - jokers.skip,
-      fiftyFifty: jokers.fiftyFiftyInitial - jokers.fiftyFifty,
-      stopTimer: jokers.stopTimerInitial - jokers.stopTimer,
-      addTime: jokers.addTimeInitial - jokers.addTime,
-      protectStreak: jokers.protectStreakInitial - jokers.protectStreak,
-      instantWin: jokers.instantWinInitial - jokers.instantWin,
-    },
+  // SAFE VALUES WITH FALLBACKS
+  const finalScore = score?.value ?? 0
+  const finalStreak = maxStreak?.value ?? 0
+  const currentDifficulty = difficulty?.value ?? 'normal'
+  const currentMode = mode?.value ?? 'classic'
+
+  // SAFE TIMER
+  let totalSeconds = 0
+  if (typeof timer !== 'undefined' && timer?.totalSeconds?.value !== undefined) {
+    totalSeconds = timer.totalSeconds.value
   }
 
-  const arr = JSON.parse(localStorage.getItem('leaderboard') || '[]')
-  arr.push(stats)
-  arr.sort((a, b) => b.score - a.score)
-  localStorage.setItem('leaderboard', JSON.stringify(arr.slice(0, 100)))
+  // SAFE JOKERS CALCULATION
+  const jokersUsed = {
+    revealLetter: 0,
+    skip: 0,
+    fiftyFifty: 0,
+    stopTimer: 0,
+    addTime: 0,
+    protectStreak: 0,
+    instantWin: 0,
+  }
+
+  if (typeof jokers !== 'undefined' && typeof jokersInitial !== 'undefined') {
+    jokersUsed.revealLetter = Math.max(
+      0,
+      (jokersInitial.revealLetter ?? 0) - (jokers.revealLetter ?? 0),
+    )
+    jokersUsed.skip = Math.max(0, (jokersInitial.skip ?? 0) - (jokers.skip ?? 0))
+    jokersUsed.fiftyFifty = Math.max(0, (jokersInitial.fiftyFifty ?? 0) - (jokers.fiftyFifty ?? 0))
+    jokersUsed.stopTimer = Math.max(0, (jokersInitial.stopTimer ?? 0) - (jokers.stopTimer ?? 0))
+    jokersUsed.addTime = Math.max(0, (jokersInitial.addTime ?? 0) - (jokers.addTime ?? 0))
+    jokersUsed.protectStreak = Math.max(
+      0,
+      (jokersInitial.protectStreak ?? 0) - (jokers.protectStreak ?? 0),
+    )
+    jokersUsed.instantWin = Math.max(0, (jokersInitial.instantWin ?? 0) - (jokers.instantWin ?? 0))
+  }
+
+  // FINAL STATS
+  const gameStats = {
+    score: finalScore,
+    bestStreak: finalStreak,
+    difficulty: currentDifficulty,
+    mode: currentMode,
+    date: new Date().toISOString(),
+    durationSeconds: totalSeconds,
+    jokersUsed: jokersUsed,
+  }
+
+  // SAVE TO LEADERBOARD
+  const leaderboard = JSON.parse(localStorage.getItem('leaderboard') || '[]')
+  leaderboard.push(gameStats)
+  leaderboard.sort((a, b) => b.score - a.score)
+  localStorage.setItem('leaderboard', JSON.stringify(leaderboard.slice(0, 100)))
+
   router.push('/leaderboard')
 }
 
