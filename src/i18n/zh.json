@@ -73,7 +73,11 @@
     "score": "分数",
     "streak": "连胜",
     "bestStreak": "最佳连胜：",
-    "backMenu": "返回菜单"
+    "backMenu": "返回菜单",
+    "duration": "⏱ 时长: ",
+    "jokersUsed": "🎯 道具: ",
+    "jokersNone": "无",
+    "confirmClear": "您确定要清除所有分数吗？此操作无法撤销。"
   },
   "rules": {
     "pageTitle": "游戏规则",

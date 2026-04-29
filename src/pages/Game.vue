@@ -367,14 +367,26 @@ const endSession = () => {
   router.push('/')
 }
 
+// REPLACE YOUR ENTIRE endClassicGame() WITH THIS
 const endClassicGame = () => {
   const stats = {
     score: score.value,
-    streak: maxStreak.value,
+    bestStreak: maxStreak.value,
     difficulty: difficulty.value,
     mode: mode.value,
     date: new Date().toISOString(),
+    durationSeconds: timer.totalSeconds.value, // ⏱ TIME PLAYED
+    jokersUsed: {
+      revealLetter: jokers.revealLetterInitial - jokers.revealLetter,
+      skip: jokers.skipInitial - jokers.skip,
+      fiftyFifty: jokers.fiftyFiftyInitial - jokers.fiftyFifty,
+      stopTimer: jokers.stopTimerInitial - jokers.stopTimer,
+      addTime: jokers.addTimeInitial - jokers.addTime,
+      protectStreak: jokers.protectStreakInitial - jokers.protectStreak,
+      instantWin: jokers.instantWinInitial - jokers.instantWin,
+    },
   }
+
   const arr = JSON.parse(localStorage.getItem('leaderboard') || '[]')
   arr.push(stats)
   arr.sort((a, b) => b.score - a.score)

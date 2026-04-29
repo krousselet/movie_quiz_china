@@ -73,7 +73,11 @@
     "score": "Skor",
     "streak": "Beruntun",
     "bestStreak": "Streak terbaik: ",
-    "backMenu": "Kembali ke Menu"
+    "backMenu": "Kembali ke Menu",
+    "duration": "⏱ Durasi: ",
+    "jokersUsed": "🎯 Joker: ",
+    "jokersNone": "Tidak ada",
+    "confirmClear": "Apakah Anda yakin ingin menghapus semua skor? Ini tidak bisa dibatalkan."
   },
   "rules": {
     "pageTitle": "Aturan permainan",

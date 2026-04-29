@@ -73,7 +73,11 @@
     "score": "Punteggio",
     "streak": "Serie",
     "bestStreak": "Miglior serie: ",
-    "backMenu": "Torna al menu"
+    "backMenu": "Torna al menu",
+    "duration": "⏱ Durata: ",
+    "jokersUsed": "🎯 Jolly: ",
+    "jokersNone": "Nessuno",
+    "confirmClear": "Sei sicuro di voler cancellare tutti i punteggi? Questa azione non può essere annullata."
   },
   "rules": {
     "pageTitle": "Regole del gioco",
@@ -124,7 +128,7 @@
       "btcSkip": "Salta un film",
       "btcPause": "Metti in pausa il timer per 10 secondi",
       "btcAdd": "Aggiungi 15 secondi al timer",
-      "btcReveal": "Rivela una lettera del titolo",
+      "btcReveal": "Rivela una lettera",
       "str1": "Permetti un errore senza rompere la serie",
       "str2": "Salta il film attuale",
       "str3": "Rivela una lettera",

@@ -73,7 +73,11 @@
     "score": "スコア",
     "streak": "連続",
     "bestStreak": "最高連続正解： ",
-    "backMenu": "メニューに戻る"
+    "backMenu": "メニューに戻る",
+    "duration": "⏱ 時間: ",
+    "jokersUsed": "🎯 ジョーカー: ",
+    "jokersNone": "なし",
+    "confirmClear": "すべてのスコアを消去してもよろしいですか？この操作は元に戻せません。"
   },
   "rules": {
     "pageTitle": "ゲームのルール",

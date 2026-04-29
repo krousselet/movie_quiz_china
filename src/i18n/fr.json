@@ -73,7 +73,11 @@
     "score": "Score",
     "streak": "Série",
     "bestStreak": "Meilleure série : ",
-    "backMenu": "Retour au menu"
+    "backMenu": "Retour au menu",
+    "duration": "⏱ Durée : ",
+    "jokersUsed": "🎯 Jokers : ",
+    "jokersNone": "Aucun",
+    "confirmClear": "Êtes-vous sûr de vouloir effacer tous les scores ? Ceci est irréversible."
   },
   "rules": {
     "pageTitle": "Règles du jeu",
@@ -124,7 +128,7 @@
       "btcSkip": "Passer un film",
       "btcPause": "Mettre le chronomètre en pause pendant 10 secondes",
       "btcAdd": "Ajouter 15 secondes au chronomètre",
-      "btcReveal": "Révéler une lettre du titre",
+      "btcReveal": "Révéler une lettre",
       "str1": "Autoriser une erreur sans casser la série",
       "str2": "Passer le film actuel",
       "str3": "Révéler une lettre",

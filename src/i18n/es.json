@@ -73,7 +73,11 @@
     "score": "Puntuación",
     "streak": "Racha",
     "bestStreak": "Mejor racha: ",
-    "backMenu": "Volver al menú"
+    "backMenu": "Volver al menú",
+    "duration": "⏱ Duración: ",
+    "jokersUsed": "🎯 Comodines: ",
+    "jokersNone": "Ninguno",
+    "confirmClear": "¿Estás seguro de que quieres borrar todas las puntuaciones? Esto no se puede deshacer."
   },
   "rules": {
     "pageTitle": "Reglas del juego",
@@ -124,7 +128,7 @@
       "btcSkip": "Saltar una película",
       "btcPause": "Pausar el temporizador 10 segundos",
       "btcAdd": "Añadir 15 segundos al temporizador",
-      "btcReveal": "Revelar una letra del título",
+      "btcReveal": "Revelar una letra",
       "str1": "Permitir un error sin romper la racha",
       "str2": "Saltar la película actual",
       "str3": "Revelar una letra",

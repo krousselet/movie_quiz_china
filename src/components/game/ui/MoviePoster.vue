@@ -39,10 +39,15 @@ defineProps({
   object-fit: contain;
 }
 
-/* MOBILE: SMALLER POSTER */
+/* ✅ MOBILE STYLES INSIDE COMPONENT (MODULAR) */
 @media (max-width: 768px) {
+  .poster-card {
+    max-height: 160px;
+    padding: 0;
+  }
   .poster {
-    max-height: 180px !important;
+    max-height: 160px;
+    width: auto;
   }
 }
 </style>

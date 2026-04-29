@@ -35,4 +35,15 @@ defineProps({
 .wordGap {
   margin-inline: 1rem;
 }
+
+/* ✅ MOBILE STYLES INSIDE COMPONENT (MODULAR) */
+@media (max-width: 768px) {
+  .hangman-mask {
+    font-size: 1.2rem;
+    margin: 0.4rem 0;
+  }
+  .char-block {
+    min-width: 10px;
+  }
+}
 </style>

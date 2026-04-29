@@ -5,7 +5,6 @@ export class TMDBService {
   private storage = new StorageService()
   private readonly BASE_URL = 'https://api.themoviedb.org/3'
 
-  // ✅ Safe, no risk, no hardcoding
   private getApiKey(): string {
     const key = import.meta.env.VITE_TMDB_API_KEY
     if (!key) console.warn('⚠️ TMDB API Key not found (env missing)')
@@ -16,15 +15,37 @@ export class TMDBService {
     this.storage.saveCachedMovies([])
   }
 
-  // ✅ NOW WE ACCEPT LANGUAGE FROM OUTSIDE (SAFE)
-  async getRandomMovies(limit: number = 20, userLang: string = 'en'): Promise<Movie[]> {
-    const cached = this.storage.getCachedMovies()
-    if (cached.length > 0) return cached
+  // Get already seen movie IDs
+  private getSeenMovieIds(): number[] {
+    try {
+      return JSON.parse(localStorage.getItem('seenMovieIds') || '[]')
+    } catch {
+      return []
+    }
+  }
 
+  // Mark movie as seen
+  private addSeenMovieIds(ids: number[]): void {
+    const seen = this.getSeenMovieIds()
+    const unique = Array.from(new Set([...seen, ...ids]))
+    localStorage.setItem('seenMovieIds', JSON.stringify(unique))
+  }
+
+  // Reset seen list (when full)
+  private resetSeenMovies(): void {
+    localStorage.removeItem('seenMovieIds')
+  }
+
+  /**
+   * ✅ SMART RANDOM MOVIES
+   * - Fast load from cache
+   * - No duplicates
+   * - New movies every game
+   */
+  async getRandomMovies(limit: number = 20, userLang: string = 'en'): Promise<Movie[]> {
     const API_KEY = this.getApiKey()
     if (!API_KEY) return []
 
-    // Language map for TMDB
     const langMap: Record<string, string> = {
       en: 'en-US',
       fr: 'fr-FR',
@@ -36,7 +57,23 @@ export class TMDBService {
       ja: 'ja-JP',
     }
     const tmdbLang = langMap[userLang] || 'en-US'
-    const randomPage = Math.floor(Math.random() * 5) + 1
+
+    // 1. Get cached & seen movies
+    let cached = this.storage.getCachedMovies()
+    const seenIds = this.getSeenMovieIds()
+
+    // 2. Filter out already seen movies FROM CACHE
+    let available = cached.filter((m) => !seenIds.includes(m.id))
+
+    // 3. If enough cached unused movies → USE THEM (FAST)
+    if (available.length >= limit) {
+      const selected = available.sort(() => Math.random() - 0.5).slice(0, limit)
+      this.addSeenMovieIds(selected.map((m) => m.id))
+      return selected
+    }
+
+    // 4. If cache is low → FETCH NEW MOVIES
+    const randomPage = Math.floor(Math.random() * 20) + 1
 
     try {
       const res = await fetch(
@@ -44,23 +81,43 @@ export class TMDBService {
       )
 
       const data = await res.json()
-      if (!data.results || !Array.isArray(data.results)) return []
+      if (!data.results || !Array.isArray(data.results)) return available
 
-      const validMovies = data.results.filter((item: any) => !!item.backdrop_path)
-      const movies = validMovies.slice(0, limit).map((item: any) => ({
-        id: item.id,
-        title: item.title,
-        originalTitle: item.original_title,
-        displayTitle: this.maskTitle(item.title),
-        poster_path: `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`,
-      }))
+      // 5. Format new movies
+      let newMovies: Movie[] = data.results
+        .filter((item: any) => !!item.backdrop_path)
+        .map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          originalTitle: item.original_title,
+          displayTitle: this.maskTitle(item.title),
+          poster_path: `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`,
+        }))
 
-      const shuffled = movies.sort(() => Math.random() - 0.5)
-      this.storage.saveCachedMovies(shuffled)
+      // 6. Exclude seen
+      newMovies = newMovies.filter((m) => !seenIds.includes(m.id))
+
+      // 7. If NO new movies left → reset seen list
+      if (newMovies.length === 0) {
+        this.resetSeenMovies()
+        return this.getRandomMovies(limit, userLang)
+      }
+
+      // 8. Merge & save full cache
+      const updatedCache = Array.from(new Map([...cached, ...newMovies].map((m) => [m.id, m]))).map(
+        (entry) => entry[1],
+      )
+
+      this.storage.saveCachedMovies(updatedCache)
+
+      // 9. Select random & mark as seen
+      const shuffled = newMovies.sort(() => Math.random() - 0.5).slice(0, limit)
+      this.addSeenMovieIds(shuffled.map((m) => m.id))
+
       return shuffled
     } catch (err) {
       console.error('TMDB Fetch Error:', err)
-      return []
+      return available
     }
   }
 

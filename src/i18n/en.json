@@ -73,7 +73,11 @@
     "score": "Score",
     "streak": "Streak",
     "bestStreak": "Best Streak: ",
-    "backMenu": "Back to Menu"
+    "backMenu": "Back to Menu",
+    "duration": "⏱ Duration: ",
+    "jokersUsed": "🎯 Jokers: ",
+    "jokersNone": "None",
+    "confirmClear": "Are you sure you want to clear all scores? This cannot be undone."
   },
   "rules": {
     "pageTitle": "Rules of the game",
@@ -124,7 +128,7 @@
       "btcSkip": "Skip a movie",
       "btcPause": "Pause the timer for 10 seconds",
       "btcAdd": "Add 15 seconds to the timer",
-      "btcReveal": "Reveal one letter of the title",
+      "btcReveal": "Reveal one letter",
       "str1": "Allow one mistake without breaking streak",
       "str2": "Skip the current movie",
       "str3": "Reveal one letter",
