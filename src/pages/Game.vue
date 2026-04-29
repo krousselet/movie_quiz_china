@@ -2,7 +2,6 @@
   <section class="game-page">
     <div class="cinema-overlay"></div>
 
-    <!-- ✅ TOAST TELEPORTED TO BODY (ALWAYS VISIBLE) -->
     <Teleport to="body">
       <div
         class="feedback-toast"
@@ -115,7 +114,6 @@
       </div>
     </div>
 
-    <!-- Game Win / Game Over Modal -->
     <div
       v-if="gameWon || gameOver"
       class="game-modal-overlay"
@@ -144,7 +142,6 @@
       </div>
     </div>
 
-    <!-- ✅ 50/50 MODAL TELEPORTED TO BODY (FULLSCREEN CENTERED) -->
     <Teleport to="body">
       <div v-if="showFiftyModal" class="fifty-modal-overlay">
         <div class="fifty-modal">
@@ -168,7 +165,6 @@ import { ref, computed, onMounted, onUnmounted, provide, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
-import '@/components/game/ui/game-ui.css'
 import GameStats from '@/components/game/ui/GameStats.vue'
 import MoviePoster from '@/components/game/ui/MoviePoster.vue'
 import HangmanMask from '@/components/game/ui/HangmanMask.vue'
@@ -197,28 +193,21 @@ const option2 = ref('')
 
 const feedbackType = ref('')
 const cheatActive = ref(false)
-
 const feedbackMessage = ref('')
 const feedbackTimeout = ref(null)
 
-// ------------------------------
-// ✅ TIMER VARIABLES — ALL DECLARED
-// ------------------------------
-let timeLeft = ref(0)
-let startTimer
-let stopTimerFor
-let addTime
-let clearTimer // ✅ DECLARED HERE
-let getWinStreak
+// ✅ DECLARE THE TIMER HERE, NOT LATER
+const winCond = useGameWinCondition(difficulty.value || 'easy')
+const timerDuration = winCond.getTimerDuration()
+const timer = useGameTimer(timerDuration)
 
 const formattedTime = computed(() => {
-  const sec = timeLeft.value || 0
+  const sec = timer.timeLeft.value || 0
   const m = String(Math.floor(sec / 60)).padStart(2, '0')
   const s = String(sec % 60).padStart(2, '0')
   return `${m}:${s}`
 })
 
-// Sounds
 const playSound = (type) => {
   const sounds = {
     perfect: new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3'),
@@ -242,7 +231,6 @@ const showFeedback = (msg, type) => {
   feedbackMessage.value = msg
   feedbackType.value = type
   playSound(type)
-
   if (feedbackTimeout.value) clearTimeout(feedbackTimeout.value)
   feedbackTimeout.value = setTimeout(() => {
     feedbackMessage.value = ''
@@ -285,12 +273,11 @@ provide('consumeStreakProtection', consumeStreakProtection)
 
 const gameWon = ref(false)
 const gameOver = ref(false)
-const requiredStreak = computed(() => getWinStreak?.() || 15)
+const requiredStreak = computed(() => winCond.getWinStreak() || 15)
 
 const nextMovie = () => {
   if (!movieList.value.length) return
   isSkipping.value = true
-
   setTimeout(() => {
     const idx = movieList.value.findIndex((m) => m.id === currentMovie.value?.id)
     const next = (idx + 1) % movieList.value.length
@@ -319,14 +306,12 @@ const checkAnswer = () => {
       addScore(pts)
       addStreak()
       showFeedback(t('game.perfect'), 'perfect')
-
       if (mode.value === 'longest-streak' && streak.value >= requiredStreak.value) {
         gameWon.value = true
       }
     },
     () => {
       showFeedback(t('game.wrong'), 'wrong')
-
       if (mode.value === 'longest-streak') {
         breakStreak()
         if (streak.value === 0) gameOver.value = true
@@ -369,8 +354,8 @@ const choose = (val) => {
   checkAnswer()
 }
 
-const handleStopTimer = () => useStopTimer(difficulty.value, stopTimerFor)
-const handleAddTime = () => useAddTime(difficulty.value, addTime)
+const handleStopTimer = () => useStopTimer(difficulty.value, timer.stopTimerFor)
+const handleAddTime = () => useAddTime(difficulty.value, timer.addTime)
 const handleInstantWin = () =>
   useInstantWin(() => {
     userAnswer.value = currentMovie.value.title
@@ -378,7 +363,7 @@ const handleInstantWin = () =>
   })
 
 const endSession = () => {
-  clearTimer() // ✅ NOW DEFINED
+  timer.clearTimer()
   router.push('/')
 }
 
@@ -401,21 +386,6 @@ onMounted(async () => {
   mode.value = route.query.mode || 'classic'
   difficulty.value = route.query.difficulty || 'easy'
 
-  const winCond = useGameWinCondition(difficulty.value)
-  getWinStreak = winCond.getWinStreak
-
-  // ------------------------------
-  // ✅ TIMER INIT — FULLY FIXED
-  // ------------------------------
-  const timerDuration = winCond.getTimerDuration()
-  const timerStuff = useGameTimer(timerDuration)
-
-  timeLeft = timerStuff.timeLeft
-  startTimer = timerStuff.startTimer
-  stopTimerFor = timerStuff.stopTimerFor
-  addTime = timerStuff.addTime
-  clearTimer = timerStuff.clearTimer // ✅ ASSIGNED
-
   isLoading.value = true
   const movies = await tmdb.getRandomMovies(20, locale.value)
   movieList.value = movies
@@ -427,21 +397,18 @@ onMounted(async () => {
 
   isLoading.value = false
 
-  // ------------------------------
-  // ✅ START TIMER CORRECTLY
-  // ------------------------------
   if (mode.value === 'beat-the-clock') {
-    timeLeft.value = timerDuration
-    startTimer(endSession)
+    timer.timeLeft.value = winCond.getTimerDuration()
+    timer.startTimer(endSession)
   }
 })
 
 onUnmounted(() => {
-  clearTimer() // ✅ SAFE
+  timer.clearTimer()
   if (feedbackTimeout.value) clearTimeout(feedbackTimeout.value)
 })
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/styles/game';
+@use '@/assets/styles/_game.scss';
 </style>

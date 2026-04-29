@@ -1,0 +1,33 @@
+@use './variables' as *;
+
+.fifty-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999999;
+  background: rgba(0, 0, 0, 0.96);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.fifty-modal {
+  background: var(--bg-secondary);
+  border: 2px solid var(--cinema-gold);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.fifty-modal h3 {
+  color: var(--cinema-gold);
+  margin-bottom: 1.5rem;
+}
+
+.fifty-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}

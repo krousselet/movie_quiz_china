@@ -16,11 +16,9 @@ defineProps({
 
 <style scoped>
 .poster-card {
-  background: #1e293b;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 12px;
-  border: 2px solid #fbbf24;
-  min-height: 400px;
+  min-height: unset;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,6 +34,15 @@ defineProps({
 
 .poster {
   max-height: 400px;
+  max-width: 100%;
   border-radius: 8px;
+  object-fit: contain;
+}
+
+/* MOBILE: SMALLER POSTER */
+@media (max-width: 768px) {
+  .poster {
+    max-height: 180px !important;
+  }
 }
 </style>

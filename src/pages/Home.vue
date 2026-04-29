@@ -41,19 +41,14 @@ const go = (path: string) => {
 
 <style lang="scss" scoped>
 @use '@/assets/styles/variables' as *;
-@use '@/assets/styles/mixins' as *;
 
-/* ------------------------------ */
-/* LAYOUT */
-/* ------------------------------ */
 .home-page {
-  position: fixed;
-  inset: 0;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--bg-primary);
-  overflow: hidden !important;
+  position: relative;
   z-index: 1;
 }
 
@@ -96,15 +91,13 @@ const go = (path: string) => {
   flex-wrap: wrap;
 }
 
-/* ------------------------------ */
-/* BUTTONS */
-/* ------------------------------ */
 .btn {
   padding: 0.9rem 2.2rem;
   border-radius: 6px;
   font-size: 1rem;
   font-weight: 600;
   transition: all 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-2px);
@@ -114,6 +107,7 @@ const go = (path: string) => {
 .primary {
   background: var(--cinema-gold);
   color: #111;
+  border: none;
 }
 
 .secondary {
@@ -125,5 +119,6 @@ const go = (path: string) => {
 .tertiary {
   background: transparent;
   color: var(--text-secondary);
+  border: none;
 }
 </style>

@@ -14,9 +14,9 @@ export function useGameTimer(initialSeconds: number) {
     stopTimeout = null
     isStopped.value = false
   }
-
   // ✅ NOW startTimer CAN SAFELY CALL clearTimer
   const startTimer = (onTimeOut?: () => void): void => {
+    console.log('test')
     // Reset time to full duration
     if (timeLeft.value <= 0) {
       timeLeft.value = initialSeconds
@@ -39,6 +39,7 @@ export function useGameTimer(initialSeconds: number) {
   const stopTimerFor = (seconds: number): void => {
     if (isStopped.value) return
     isStopped.value = true
+    console.log('time stopped')
 
     stopTimeout = window.setTimeout(() => {
       isStopped.value = false
@@ -47,6 +48,7 @@ export function useGameTimer(initialSeconds: number) {
 
   const addTime = (seconds: number): void => {
     timeLeft.value += seconds
+    console.log('time added')
   }
 
   return {
