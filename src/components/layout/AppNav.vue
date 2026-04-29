@@ -69,14 +69,13 @@ const navItems = computed(() => [
 </script>
 
 <style scoped lang="scss">
-// Reuse your cinema theme variables
 .app-nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 999;
-  background: rgba(15, 15, 20, 0.92);
+  z-index: 9999;
+  background: rgba(15, 15, 20, 1);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid rgba(207, 168, 88, 0.15);
 }
@@ -94,7 +93,7 @@ const navItems = computed(() => [
 .nav-logo {
   font-size: 1.4rem;
   letter-spacing: 0.15em;
-  color: #f0e9e0;
+  color: var(--text-primary);
   text-decoration: none;
   font-weight: 400;
 
@@ -105,14 +104,13 @@ const navItems = computed(() => [
   }
 }
 
-// Desktop links
 .nav-desktop {
   display: flex;
   gap: 2.5rem;
 }
 
 .nav-link {
-  color: white;
+  color: var(--text-primary);
   text-decoration: none;
   letter-spacing: 0.1em;
   padding: 0.5rem 0;
@@ -120,11 +118,11 @@ const navItems = computed(() => [
   transition: color 0.3s ease;
 
   &:hover {
-    color: gold;
+    color: var(--cinema-gold);
   }
 
   &.active {
-    color: gold;
+    color: var(--cinema-gold);
 
     &::after {
       content: '';
@@ -139,71 +137,93 @@ const navItems = computed(() => [
   }
 }
 
-// Hamburger button
+// --------------------------
+// HAMBURGER BUTTON (VISIBLE)
+// --------------------------
 .nav-hamburger {
   display: none;
+  position: relative;
+  z-index: 99999;
   background: transparent;
   border: none;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-  padding: 0.5rem;
 
   .bar {
     display: block;
-    width: 26px;
-    height: 2px;
-    background: var(--text-primary);
-    margin: 6px 0;
-    transition: 0.3s ease;
+    width: 28px;
+    height: 3px;
+    background: #ffffff;
+    margin: 5px auto;
+    border-radius: 2px;
+    transition: all 0.3s ease;
   }
 }
 
-// Mobile menu
+.nav-hamburger[aria-expanded='true'] .bar {
+  background: var(--cinema-gold);
+
+  &:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  &:nth-child(2) {
+    opacity: 0;
+  }
+  &:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
 .nav-mobile {
   position: absolute;
   top: 70px;
   left: 0;
   width: 100%;
-  background: rgba(15, 15, 20, 0.98);
+  background: rgba(15, 15, 20, 1);
   border-bottom: 1px solid rgba(207, 168, 88, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
   padding: 2rem 0;
+  z-index: 9998;
 }
 
 .mobile-link {
   font-size: 1.1rem;
+  color: var(--text-primary);
+  text-decoration: none;
+
+  &.active {
+    color: var(--cinema-gold);
+  }
 }
 
-// Mobile transition
 .menu-enter-active,
 .menu-leave-active {
   transition: all 0.4s ease;
 }
+
 .menu-enter-from {
   opacity: 0;
   transform: translateY(-10px);
 }
+
 .menu-leave-to {
   opacity: 0;
   transform: translateY(-10px);
 }
 
-// Responsive breakpoint
+// --------------------------
+// MOBILE
+// --------------------------
 @media (max-width: 768px) {
   .nav-desktop {
     display: none;
   }
   .nav-hamburger {
-    display: block;
-  }
-}
-
-// Ultra wide cinema screens
-@media (min-width: 1920px) {
-  .nav-container {
-    padding: 0 4rem;
+    display: block !important;
   }
 }
 </style>

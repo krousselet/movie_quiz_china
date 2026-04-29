@@ -1,16 +1,34 @@
 import { ref } from 'vue'
 
 export function useGameTimer(initialSeconds: number) {
-  const timeLeft = ref(initialSeconds)
+  const timeLeft = ref<number>(initialSeconds)
   let timerInterval: number | null = null
-  let isStopped = ref(false)
+  const isStopped = ref<boolean>(false)
   let stopTimeout: number | null = null
 
-  const startTimer = (onTimeOut?: () => void) => {
-    if (timerInterval) return
+  // ✅ CLEAR TIMER FIRST — SO IT CAN BE USED INSIDE startTimer
+  const clearTimer = (): void => {
+    if (timerInterval) window.clearInterval(timerInterval)
+    if (stopTimeout) window.clearTimeout(stopTimeout)
+    timerInterval = null
+    stopTimeout = null
+    isStopped.value = false
+  }
+
+  // ✅ NOW startTimer CAN SAFELY CALL clearTimer
+  const startTimer = (onTimeOut?: () => void): void => {
+    // Reset time to full duration
+    if (timeLeft.value <= 0) {
+      timeLeft.value = initialSeconds
+    }
+
+    clearTimer()
+
     timerInterval = window.setInterval(() => {
       if (isStopped.value) return
+
       timeLeft.value--
+
       if (timeLeft.value <= 0) {
         clearTimer()
         onTimeOut?.()
@@ -18,25 +36,16 @@ export function useGameTimer(initialSeconds: number) {
     }, 1000)
   }
 
-  const clearTimer = () => {
-    if (timerInterval) clearInterval(timerInterval)
-    if (stopTimeout) clearTimeout(stopTimeout)
-    timerInterval = null
-    stopTimeout = null
-    isStopped.value = false
-  }
-
-  // ✅ NEW: Stop timer for X seconds
-  const stopTimerFor = (seconds: number) => {
+  const stopTimerFor = (seconds: number): void => {
     if (isStopped.value) return
     isStopped.value = true
+
     stopTimeout = window.setTimeout(() => {
       isStopped.value = false
     }, seconds * 1000)
   }
 
-  // ✅ NEW: Add seconds to timer
-  const addTime = (seconds: number) => {
+  const addTime = (seconds: number): void => {
     timeLeft.value += seconds
   }
 

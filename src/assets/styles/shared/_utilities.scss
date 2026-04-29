@@ -1,0 +1,12 @@
+@use '../globals' as *;
+
+* {
+  box-sizing: border-box;
+}
+
+:deep(.game-button) {
+  padding: 0.55rem 0.9rem !important;
+  @include responsive-text(0.8rem, 0.92rem);
+  white-space: nowrap;
+  border-radius: $border-radius !important;
+}

@@ -2,10 +2,25 @@
   <section class="game-page">
     <div class="cinema-overlay"></div>
 
+    <!-- ✅ TOAST TELEPORTED TO BODY (ALWAYS VISIBLE) -->
+    <Teleport to="body">
+      <div
+        class="feedback-toast"
+        :class="{
+          show: !!feedbackMessage,
+          perfect: feedbackType === 'perfect',
+          almost: feedbackType === 'almost',
+          close: feedbackType === 'close',
+          wrong: feedbackType === 'wrong',
+        }"
+      >
+        {{ feedbackMessage }}
+      </div>
+    </Teleport>
+
     <div v-if="isLoading" class="loading">{{ t('game.loading') }}</div>
 
     <div class="game-container" v-else>
-      <!-- TOP: STATS -->
       <GameStats
         :score="score"
         :streak="streak"
@@ -13,8 +28,7 @@
         :show-timer="mode === 'beat-the-clock'"
       />
 
-      <!-- MIDDLE: POSTER + HANGMAN (FLEXIBLE AREA) -->
-      <div class="middle-section">
+      <div class="game-middle">
         <MoviePoster
           :poster="currentMovie?.poster_path"
           :sliding="isSkipping"
@@ -24,8 +38,7 @@
         <HangmanMask :mask="hangmanMask" />
       </div>
 
-      <!-- JOKERS -->
-      <div class="joker-row">
+      <div class="game-jokers">
         <GameButton
           variant="joker"
           :is-disabled="jokers.revealLetter <= 0"
@@ -48,10 +61,10 @@
             {{ t('rules.jokers.btcSkip') }} ({{ jokers.skip }})
           </GameButton>
           <GameButton variant="joker" :is-disabled="jokers.stopTimer <= 0" @click="handleStopTimer">
-            {{ t('rules.jokers.btcPause', { secPause: 10 }) }} ({{ jokers.stopTimer }})
+            {{ t('rules.jokers.btcPause') }}
           </GameButton>
           <GameButton variant="joker" :is-disabled="jokers.addTime <= 0" @click="handleAddTime">
-            {{ t('rules.jokers.btcAdd', { secAdd: 15 }) }} ({{ jokers.addTime }})
+            {{ t('rules.jokers.btcAdd') }}
           </GameButton>
         </template>
 
@@ -64,20 +77,19 @@
             :is-disabled="jokers.protectStreak <= 0"
             @click="useProtectStreak"
           >
-            {{ t('rules.jokers.str1') }} ({{ jokers.protectStreak }})
+            {{ t('rules.jokers.str1') }}
           </GameButton>
           <GameButton
             variant="joker"
             :is-disabled="jokers.instantWin <= 0"
             @click="handleInstantWin"
           >
-            {{ t('game.instantWin') }} ({{ jokers.instantWin }})
+            {{ t('game.instantWin') }}
           </GameButton>
         </template>
       </div>
 
-      <!-- BOTTOM: INPUT + BUTTONS -->
-      <div class="bottom-section">
+      <div class="game-bottom">
         <div class="answer-box">
           <input
             v-model="userAnswer"
@@ -100,26 +112,21 @@
         </div>
 
         <p v-if="showError" class="error-text">{{ t('game.empty') }}</p>
-
-        <div class="feedback" :class="feedbackType">
-          <span v-if="feedbackType === 'perfect'">{{ t('game.perfect') }}</span>
-          <span v-else-if="feedbackType === 'close'">{{ t('game.close') }}</span>
-          <span v-else-if="feedbackType === 'almost'">{{ t('game.almost') }}</span>
-          <span v-else-if="feedbackType === 'wrong'">
-            {{ t('game.wrong') }}! {{ t('game.answer') }}: {{ correctAnswer }}
-          </span>
-        </div>
       </div>
     </div>
 
-    <!-- WIN / LOSE MODAL -->
-    <div v-if="gameWon || gameOver" class="end-modal">
-      <div class="modal-card" :class="{ win: gameWon, lose: gameOver }">
-        <h1 class="modal-title">
+    <!-- Game Win / Game Over Modal -->
+    <div
+      v-if="gameWon || gameOver"
+      class="game-modal-overlay"
+      :class="{ show: gameWon || gameOver }"
+    >
+      <div class="game-modal" :class="{ win: gameWon, lose: gameOver }">
+        <h2 class="modal-title">
           <span v-if="gameWon">🎉 You Won!</span>
           <span v-if="gameOver">💀 Game Over</span>
-        </h1>
-        <div class="stats">
+        </h2>
+        <div class="modal-stats">
           <p>
             Streak: <b>{{ streak }}</b>
           </p>
@@ -130,22 +137,29 @@
             Score: <b>{{ score }}</b>
           </p>
         </div>
-        <div class="modal-buttons">
+        <div class="modal-actions">
           <GameButton variant="success" @click="endClassicGame"> Save Score </GameButton>
-          <GameButton variant="danger" @click="endSession"> Quit </GameButton>
+          <GameButton variant="danger" @click="endSession">Quit</GameButton>
         </div>
       </div>
     </div>
 
-    <div v-if="showFiftyModal" class="modal-overlay">
-      <div class="modal-card">
-        <h3>{{ t('game.correctTitle') }}</h3>
-        <div class="choices">
-          <GameButton variant="choice" @click="choose(option1)">{{ option1 }}</GameButton>
-          <GameButton variant="choice" @click="choose(option2)">{{ option2 }}</GameButton>
+    <!-- ✅ 50/50 MODAL TELEPORTED TO BODY (FULLSCREEN CENTERED) -->
+    <Teleport to="body">
+      <div v-if="showFiftyModal" class="fifty-modal-overlay">
+        <div class="fifty-modal">
+          <h3>{{ t('game.correctTitle') }}</h3>
+          <div class="fifty-choices">
+            <GameButton variant="choice" @click="choose(option1)">
+              {{ option1 }}
+            </GameButton>
+            <GameButton variant="choice" @click="choose(option2)">
+              {{ option2 }}
+            </GameButton>
+          </div>
         </div>
       </div>
-    </div>
+    </Teleport>
   </section>
 </template>
 
@@ -181,15 +195,60 @@ const showFiftyModal = ref(false)
 const option1 = ref('')
 const option2 = ref('')
 
-// GOD MODE
+const feedbackType = ref('')
 const cheatActive = ref(false)
-watch(userAnswer, (val) => {
-  if (val === 'god') {
-    cheatActive.value = true
-    userAnswer.value = ''
-    console.log('✅ CHEAT ACTIVE')
-  }
+
+const feedbackMessage = ref('')
+const feedbackTimeout = ref(null)
+
+// ------------------------------
+// ✅ TIMER VARIABLES — ALL DECLARED
+// ------------------------------
+let timeLeft = ref(0)
+let startTimer
+let stopTimerFor
+let addTime
+let clearTimer // ✅ DECLARED HERE
+let getWinStreak
+
+const formattedTime = computed(() => {
+  const sec = timeLeft.value || 0
+  const m = String(Math.floor(sec / 60)).padStart(2, '0')
+  const s = String(sec % 60).padStart(2, '0')
+  return `${m}:${s}`
 })
+
+// Sounds
+const playSound = (type) => {
+  const sounds = {
+    perfect: new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3'),
+    almost: new Audio(
+      'https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3',
+    ),
+    close: new Audio(
+      'https://assets.mixkit.co/sfx/preview/mixkit-software-interface-start-2574.mp3',
+    ),
+    wrong: new Audio(
+      'https://assets.mixkit.co/sfx/preview/mixkit-software-interface-wrong-1470.mp3',
+    ),
+  }
+  if (sounds[type]) {
+    sounds[type].volume = 0.7
+    sounds[type].play().catch(() => {})
+  }
+}
+
+const showFeedback = (msg, type) => {
+  feedbackMessage.value = msg
+  feedbackType.value = type
+  playSound(type)
+
+  if (feedbackTimeout.value) clearTimeout(feedbackTimeout.value)
+  feedbackTimeout.value = setTimeout(() => {
+    feedbackMessage.value = ''
+    feedbackType.value = ''
+  }, 1800)
+}
 
 const {
   score,
@@ -206,7 +265,7 @@ const {
 } = useGameLogic()
 
 const { buildHangmanMask, revealLetterInMask } = useHangman()
-const { feedbackType, correctAnswer, isCorrect, isWrong, check, reset } = useAnswerChecker()
+const { correctAnswer, isCorrect, isWrong, check, reset } = useAnswerChecker()
 
 const {
   jokers,
@@ -223,20 +282,6 @@ const {
 
 provide('streakProtected', streakProtected)
 provide('consumeStreakProtection', consumeStreakProtection)
-
-let timer
-let timeLeft
-let startTimer
-let stopTimerFor
-let addTime
-let getWinStreak
-
-const formattedTime = computed(() => {
-  if (!timeLeft) return '00:00'
-  const m = String(Math.floor(timeLeft.value / 60)).padStart(2, '0')
-  const s = String(timeLeft.value % 60).padStart(2, '0')
-  return `${m}:${s}`
-})
 
 const gameWon = ref(false)
 const gameOver = ref(false)
@@ -259,10 +304,7 @@ const nextMovie = () => {
 
 const checkAnswer = () => {
   if (!currentMovie.value) return
-
-  if (cheatActive.value) {
-    userAnswer.value = currentMovie.value.title
-  }
+  if (cheatActive.value) userAnswer.value = currentMovie.value.title
 
   if (!userAnswer.value.trim()) {
     showError.value = true
@@ -273,15 +315,18 @@ const checkAnswer = () => {
   check(
     userAnswer.value,
     currentMovie.value.title,
-    (pts) => {
+    (pts, type) => {
       addScore(pts)
       addStreak()
+      showFeedback(t('game.perfect'), 'perfect')
 
       if (mode.value === 'longest-streak' && streak.value >= requiredStreak.value) {
         gameWon.value = true
       }
     },
     () => {
+      showFeedback(t('game.wrong'), 'wrong')
+
       if (mode.value === 'longest-streak') {
         breakStreak()
         if (streak.value === 0) gameOver.value = true
@@ -295,7 +340,7 @@ const checkAnswer = () => {
     reset()
     userAnswer.value = ''
     if (!gameWon.value && !gameOver.value) nextMovie()
-  }, 2000)
+  }, 700)
 }
 
 const handleRevealLetter = () => {
@@ -333,7 +378,7 @@ const handleInstantWin = () =>
   })
 
 const endSession = () => {
-  if (timer?.value) timer.value.clear()
+  clearTimer() // ✅ NOW DEFINED
   router.push('/')
 }
 
@@ -359,206 +404,44 @@ onMounted(async () => {
   const winCond = useGameWinCondition(difficulty.value)
   getWinStreak = winCond.getWinStreak
 
-  const timerStuff = useGameTimer(winCond.getTimerDuration())
-  timer = timerStuff.timer
+  // ------------------------------
+  // ✅ TIMER INIT — FULLY FIXED
+  // ------------------------------
+  const timerDuration = winCond.getTimerDuration()
+  const timerStuff = useGameTimer(timerDuration)
+
   timeLeft = timerStuff.timeLeft
   startTimer = timerStuff.startTimer
   stopTimerFor = timerStuff.stopTimerFor
   addTime = timerStuff.addTime
+  clearTimer = timerStuff.clearTimer // ✅ ASSIGNED
 
   isLoading.value = true
   const movies = await tmdb.getRandomMovies(20, locale.value)
   movieList.value = movies
   currentMovie.value = movies[0] || null
 
-  if (currentMovie.value) hangmanMask.value = buildHangmanMask(currentMovie.value.title)
+  if (currentMovie.value) {
+    hangmanMask.value = buildHangmanMask(currentMovie.value.title)
+  }
 
   isLoading.value = false
-  if (mode.value === 'beat-the-clock') startTimer(endSession)
+
+  // ------------------------------
+  // ✅ START TIMER CORRECTLY
+  // ------------------------------
+  if (mode.value === 'beat-the-clock') {
+    timeLeft.value = timerDuration
+    startTimer(endSession)
+  }
 })
 
 onUnmounted(() => {
-  if (timer?.value) timer.value.clear()
+  clearTimer() // ✅ SAFE
+  if (feedbackTimeout.value) clearTimeout(feedbackTimeout.value)
 })
 </script>
 
-<style scoped>
-.game-page {
-  height: 100vh;
-  width: 100vw;
-  background: #0f172a;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.4rem;
-  position: relative;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.cinema-overlay {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, #000 130%);
-  z-index: 0;
-}
-
-.game-container {
-  position: relative;
-  z-index: 1;
-  max-width: 900px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.4rem;
-  text-align: center;
-  box-sizing: border-box;
-  padding: 0.4rem 0;
-}
-
-.middle-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  min-height: 0;
-}
-
-.joker-row {
-  display: flex;
-  gap: 0.3rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.bottom-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  width: 100%;
-}
-
-.answer-box {
-  display: flex;
-  gap: 0.3rem;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 2.2rem;
-}
-
-.answer-input {
-  flex: 1 1 130px;
-  max-width: 100%;
-  padding: 0.5rem 0.7rem;
-  border-radius: 8px;
-  background: #1e293b;
-  border: 1px solid #334155;
-  color: white;
-  font-size: 0.9rem;
-  box-sizing: border-box;
-}
-
-.feedback {
-  font-size: clamp(0.85rem, 2.5vw, 1rem);
-  font-weight: bold;
-  min-height: 20px;
-}
-.feedback.perfect {
-  color: #22c55e;
-}
-.feedback.wrong {
-  color: #ef4444;
-}
-
-.error-text {
-  color: #f87171;
-  font-size: 0.8rem;
-  margin: 0;
-}
-
-/* MODALS */
-.end-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.92);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-.modal-card {
-  background: #1e293b;
-  padding: 1.4rem;
-  border-radius: 16px;
-  text-align: center;
-  width: 100%;
-  max-width: 380px;
-  border: 2px solid #64748b;
-  box-sizing: border-box;
-}
-
-.modal-card.win {
-  border-color: #22c55e;
-}
-.modal-card.lose {
-  border-color: #ef4444;
-}
-
-.modal-title {
-  font-size: clamp(1.2rem, 4vw, 1.5rem);
-  margin-bottom: 0.8rem;
-}
-
-.stats {
-  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
-  line-height: 1.5;
-  margin-bottom: 0.8rem;
-}
-
-.modal-buttons {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-.choices {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.8rem;
-}
-
-:deep(.game-button) {
-  padding: 0.5rem 0.8rem !important;
-  font-size: clamp(0.8rem, 2.2vw, 0.9rem) !important;
-  white-space: nowrap;
-}
+<style lang="scss" scoped>
+@use '@/assets/styles/game';
 </style>

@@ -39,7 +39,13 @@ const go = (path: string) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/mixins' as *;
+
+/* ------------------------------ */
+/* LAYOUT */
+/* ------------------------------ */
 .home-page {
   position: fixed;
   inset: 0;
@@ -90,6 +96,9 @@ const go = (path: string) => {
   flex-wrap: wrap;
 }
 
+/* ------------------------------ */
+/* BUTTONS */
+/* ------------------------------ */
 .btn {
   padding: 0.9rem 2.2rem;
   border-radius: 6px;

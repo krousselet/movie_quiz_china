@@ -1,0 +1,13 @@
+// _mixins.scss (STANDALONE - NO IMPORTS)
+@mixin responsive-text($min, $max) {
+  font-size: clamp($min, 3vw, $max);
+}
+@mixin glassmorphism {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

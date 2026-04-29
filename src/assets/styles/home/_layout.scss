@@ -1,0 +1,51 @@
+@use '../../index' as *;
+
+.home-page {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  overflow: hidden !important;
+  z-index: 1;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(207, 168, 88, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.content {
+  z-index: 2;
+  text-align: center;
+  max-width: 700px;
+  width: 90%;
+}
+
+.title {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+
+  .gold {
+    color: var(--cinema-gold);
+  }
+}
+
+.subtitle {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}

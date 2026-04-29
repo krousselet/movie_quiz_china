@@ -1,0 +1,4 @@
+// FORWARD all globals to be used by EVERY component
+@forward 'variables';
+@forward 'mixins';
+@forward 'shared/utilities';

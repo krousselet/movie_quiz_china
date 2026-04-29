@@ -1,0 +1,29 @@
+@use '../../index' as *;
+
+.btn {
+  padding: 0.9rem 2.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.primary {
+  background: var(--cinema-gold);
+  color: #111;
+}
+
+.secondary {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.tertiary {
+  background: transparent;
+  color: var(--text-secondary);
+}
