@@ -1,6 +1,13 @@
 <template>
   <div class="poster-card" :class="{ slideOut: sliding, correct, wrong }">
-    <img v-if="poster" :src="poster" alt="Movie" class="poster" />
+    <!-- ✅ Added dynamic blur filter -->
+    <img
+      v-if="poster"
+      :src="poster"
+      alt="Movie"
+      class="poster"
+      :style="{ filter: `blur(${blur}px)` }"
+    />
     <div v-else class="loading">Loading...</div>
   </div>
 </template>
@@ -11,6 +18,11 @@ defineProps({
   sliding: Boolean,
   correct: Boolean,
   wrong: Boolean,
+  // ✅ New optional blur prop (default = 0 = no blur)
+  blur: {
+    type: Number,
+    default: 0,
+  },
 })
 </script>
 
@@ -37,9 +49,11 @@ defineProps({
   max-width: 100%;
   border-radius: 8px;
   object-fit: contain;
+  /* ✅ Smooth transition when blur changes */
+  transition: filter 1s ease;
 }
 
-/* ✅ MOBILE STYLES INSIDE COMPONENT (MODULAR) */
+/* MOBILE STYLES INSIDE COMPONENT (MODULAR) */
 @media (max-width: 768px) {
   .poster-card {
     max-height: 160px;

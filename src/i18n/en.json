@@ -67,6 +67,38 @@
     "instantWin": "Instant Win",
     "endClassic": "End game"
   },
+  "quiz": {
+    "generic": {
+      "q1": "What is cinema mainly considered as?",
+      "q2": "Which medium is this game about?",
+      "q3": "Who directs movies?",
+      "q4": "Who acts in a movie?",
+      "q5": "Where are movies projected?"
+    },
+    "movie": {
+      "releaseYear": "What year was this movie released?",
+      "mainGenre": "What is the main genre?",
+      "isFiction": "Is this movie fiction or real?",
+      "runtime": "What is the typical runtime?"
+    },
+    "answers": {
+      "art": "Art & Entertainment",
+      "sport": "Sport",
+      "science": "Science",
+      "film": "Film",
+      "book": "Book",
+      "music": "Music",
+      "director": "Director",
+      "writer": "Writer",
+      "painter": "Painter",
+      "actor": "Actor",
+      "doctor": "Doctor",
+      "teacher": "Teacher",
+      "screen": "Screen",
+      "canvas": "Canvas",
+      "stage": "Stage"
+    }
+  },
   "leaderboard": {
     "pageTitle": "Leaderboard",
     "pageDescription": "Your saved game sessions",

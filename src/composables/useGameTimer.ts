@@ -1,58 +1,60 @@
-import { ref } from 'vue'
+import { ref, onUnmounted } from 'vue'
 
-export function useGameTimer(initialSeconds: number) {
-  const timeLeft = ref<number>(initialSeconds)
+export function useGameTimer(initialTime: number) {
+  const timeLeft = ref(initialTime)
+  const isFinished = ref(false)
   let timerInterval: number | null = null
-  const isStopped = ref<boolean>(false)
-  let stopTimeout: number | null = null
+  let pauseTimeout: number | null = null
 
-  // ✅ CLEAR TIMER FIRST — SO IT CAN BE USED INSIDE startTimer
-  const clearTimer = (): void => {
-    if (timerInterval) window.clearInterval(timerInterval)
-    if (stopTimeout) window.clearTimeout(stopTimeout)
-    timerInterval = null
-    stopTimeout = null
-    isStopped.value = false
-  }
-  // ✅ NOW startTimer CAN SAFELY CALL clearTimer
-  const startTimer = (onTimeOut?: () => void): void => {
-    console.log('test')
-    // Reset time to full duration
-    if (timeLeft.value <= 0) {
-      timeLeft.value = initialSeconds
-    }
-
-    clearTimer()
+  // Start the timer
+  const startTimer = (onTimeOut?: () => void) => {
+    if (timerInterval) return
+    isFinished.value = false
 
     timerInterval = window.setInterval(() => {
-      if (isStopped.value) return
-
       timeLeft.value--
-
       if (timeLeft.value <= 0) {
+        timeLeft.value = 0
+        isFinished.value = true
         clearTimer()
         onTimeOut?.()
       }
     }, 1000)
   }
 
-  const stopTimerFor = (seconds: number): void => {
-    if (isStopped.value) return
-    isStopped.value = true
-    console.log('time stopped')
+  // Full clear (stop forever)
+  const clearTimer = () => {
+    if (timerInterval) {
+      clearInterval(timerInterval)
+      timerInterval = null
+    }
+    if (pauseTimeout) {
+      clearTimeout(pauseTimeout)
+      pauseTimeout = null
+    }
+  }
 
-    stopTimeout = window.setTimeout(() => {
-      isStopped.value = false
+  // ✅ FIXED: Pause timer for X seconds, then resume
+  const stopTimerFor = (seconds: number) => {
+    if (!timerInterval) return
+    clearInterval(timerInterval)
+    timerInterval = null
+
+    pauseTimeout = window.setTimeout(() => {
+      startTimer()
     }, seconds * 1000)
   }
 
-  const addTime = (seconds: number): void => {
+  // Add time
+  const addTime = (seconds: number) => {
     timeLeft.value += seconds
-    console.log('time added')
   }
+
+  onUnmounted(() => clearTimer())
 
   return {
     timeLeft,
+    isFinished,
     startTimer,
     clearTimer,
     stopTimerFor,

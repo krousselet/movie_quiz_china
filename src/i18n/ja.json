@@ -67,6 +67,38 @@
     "instantWin": "即時勝利",
     "endClassic": "ゲームを終了"
   },
+  "quiz": {
+    "generic": {
+      "q1": "映画は主に何と見なされますか？",
+      "q2": "このゲームはどのメディアに関するものですか？",
+      "q3": "映画を監督するのは誰ですか？",
+      "q4": "映画で演技するのは誰ですか？",
+      "q5": "映画はどこで上映されますか？"
+    },
+    "movie": {
+      "releaseYear": "この映画は何年に公開されましたか？",
+      "mainGenre": "主なジャンルは何ですか？",
+      "isFiction": "この映画はフィクションですか、実話ですか？",
+      "runtime": "一般的な上映時間はどのくらいですか？"
+    },
+    "answers": {
+      "art": "芸術・娯楽",
+      "sport": "スポーツ",
+      "science": "科学",
+      "film": "映画",
+      "book": "本",
+      "music": "音楽",
+      "director": "監督",
+      "writer": "作家",
+      "painter": "画家",
+      "actor": "俳優",
+      "doctor": "医師",
+      "teacher": "教師",
+      "screen": "スクリーン",
+      "canvas": "キャンバス",
+      "stage": "ステージ"
+    }
+  },
   "leaderboard": {
     "pageTitle": "ランキング",
     "pageDescription": "保存されたゲーム記録",

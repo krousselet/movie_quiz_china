@@ -67,6 +67,38 @@
     "instantWin": "直接获胜",
     "endClassic": "结束游戏"
   },
+  "quiz": {
+    "generic": {
+      "q1": "电影主要被视为什么？",
+      "q2": "这款游戏围绕哪种媒介？",
+      "q3": "谁负责执导电影？",
+      "q4": "谁在电影中出演角色？",
+      "q5": "电影在哪里放映？"
+    },
+    "movie": {
+      "releaseYear": "这部电影于哪一年上映？",
+      "mainGenre": "主要类型是什么？",
+      "isFiction": "这部电影是虚构故事还是真实事件？",
+      "runtime": "常规电影时长大概多久？"
+    },
+    "answers": {
+      "art": "艺术与娱乐",
+      "sport": "体育",
+      "science": "科学",
+      "film": "电影",
+      "book": "书籍",
+      "music": "音乐",
+      "director": "导演",
+      "writer": "作家",
+      "painter": "画家",
+      "actor": "演员",
+      "doctor": "医生",
+      "teacher": "教师",
+      "screen": "银幕",
+      "canvas": "画布",
+      "stage": "舞台"
+    }
+  },
   "leaderboard": {
     "pageTitle": "排行榜",
     "pageDescription": "你保存的游戏记录",

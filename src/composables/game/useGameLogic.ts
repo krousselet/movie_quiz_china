@@ -1,4 +1,5 @@
-import { ref, inject } from 'vue'
+import { ref } from 'vue'
+import type { Movie } from '@/types/game.types'
 
 export function useGameLogic() {
   const score = ref(0)
@@ -8,12 +9,14 @@ export function useGameLogic() {
   const isLoading = ref(false)
   const isSkipping = ref(false)
   const hangmanMask = ref('')
-  const currentMovie = ref(null)
-  const movieList = ref([])
+  const currentMovie = ref<Movie | null>(null)
+  const movieList = ref<Movie[]>([])
 
-  // Inject protection from jokers
-  const streakProtected = inject('streakProtected', ref(false))
-  const consumeStreakProtection = inject('consumeStreakProtection', () => {})
+  let activeJokers: any = null
+
+  const setActiveJokers = (jokers: any) => {
+    activeJokers = jokers
+  }
 
   const addScore = (points: number) => {
     score.value += points
@@ -26,10 +29,9 @@ export function useGameLogic() {
     }
   }
 
-  // ✅ FIXED: Respect streak protection
   const breakStreak = () => {
-    if (streakProtected.value) {
-      consumeStreakProtection()
+    if (activeJokers?.streakProtected?.value) {
+      activeJokers.consumeStreakProtection()
       return
     }
     streak.value = 0
@@ -39,7 +41,6 @@ export function useGameLogic() {
     score.value = 0
     streak.value = 0
     maxStreak.value = 0
-    hangmanMask.value = ''
   }
 
   return {
@@ -51,10 +52,10 @@ export function useGameLogic() {
     hangmanMask,
     currentMovie,
     movieList,
-
     addScore,
     addStreak,
     breakStreak,
     resetGameState,
+    setActiveJokers,
   }
 }

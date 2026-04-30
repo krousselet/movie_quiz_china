@@ -67,6 +67,38 @@
     "instantWin": "Menang Cepat",
     "endClassic": "Akhiri permainan"
   },
+  "quiz": {
+    "generic": {
+      "q1": "Apa definisi utama dari sinema?",
+      "q2": "Media apa yang menjadi tema game ini?",
+      "q3": "Siapa yang menyutradarai film?",
+      "q4": "Siapa yang berakting dalam film?",
+      "q5": "Di mana film diputar?"
+    },
+    "movie": {
+      "releaseYear": "Tahun berapa film ini dirilis?",
+      "mainGenre": "Apa genre utamanya?",
+      "isFiction": "Apakah film ini fiksi atau kisah nyata?",
+      "runtime": "Berapa durasi film pada umumnya?"
+    },
+    "answers": {
+      "art": "Seni & Hiburan",
+      "sport": "Olahraga",
+      "science": "Sains",
+      "film": "Film",
+      "book": "Buku",
+      "music": "Musik",
+      "director": "Sutradara",
+      "writer": "Penulis",
+      "painter": "Pelukis",
+      "actor": "Aktor",
+      "doctor": "Dokter",
+      "teacher": "Guru",
+      "screen": "Layar",
+      "canvas": "Kanvas",
+      "stage": "Panggung"
+    }
+  },
   "leaderboard": {
     "pageTitle": "Papan peringkat",
     "pageDescription": "Sesi permainan tersimpanmu",

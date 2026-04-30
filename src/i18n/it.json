@@ -67,6 +67,38 @@
     "instantWin": "Vittoria immediata",
     "endClassic": "Termina partita"
   },
+  "quiz": {
+    "generic": {
+      "q1": "Cosa è principalmente considerato il cinema?",
+      "q2": "Di quale mezzo tratta questo gioco?",
+      "q3": "Chi dirige i film?",
+      "q4": "Chi recita in un film?",
+      "q5": "Dove vengono proiettati i film?"
+    },
+    "movie": {
+      "releaseYear": "In che anno è uscito questo film?",
+      "mainGenre": "Qual è il genere principale?",
+      "isFiction": "Questo film è di finzione o storia vera?",
+      "runtime": "Qual è la sua durata tipica?"
+    },
+    "answers": {
+      "art": "Arte e intrattenimento",
+      "sport": "Sport",
+      "science": "Scienza",
+      "film": "Cinema",
+      "book": "Libro",
+      "music": "Musica",
+      "director": "Regista",
+      "writer": "Scrittore",
+      "painter": "Pittore",
+      "actor": "Attore",
+      "doctor": "Medico",
+      "teacher": "Insegnante",
+      "screen": "Schermo",
+      "canvas": "Tela",
+      "stage": "Palcoscenico"
+    }
+  },
   "leaderboard": {
     "pageTitle": "Classifica",
     "pageDescription": "Le tue partite salvate",

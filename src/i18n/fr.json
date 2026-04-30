@@ -67,6 +67,38 @@
     "instantWin": "Victoire instantanée",
     "endClassic": "Terminer la partie"
   },
+  "quiz": {
+    "generic": {
+      "q1": "Qu’est-ce que le cinéma est principalement considéré ?",
+      "q2": "Quel média est le sujet de ce jeu ?",
+      "q3": "Qui réalise les films ?",
+      "q4": "Qui joue dans un film ?",
+      "q5": "Où sont projetés les films ?"
+    },
+    "movie": {
+      "releaseYear": "En quelle année est sorti ce film ?",
+      "mainGenre": "Quel est le genre principal ?",
+      "isFiction": "Ce film est-il une fiction ou une histoire vraie ?",
+      "runtime": "Quelle est sa durée habituelle ?"
+    },
+    "answers": {
+      "art": "Art & Divertissement",
+      "sport": "Sport",
+      "science": "Science",
+      "film": "Cinéma",
+      "book": "Livre",
+      "music": "Musique",
+      "director": "Réalisateur",
+      "writer": "Écrivain",
+      "painter": "Peintre",
+      "actor": "Acteur",
+      "doctor": "Médecin",
+      "teacher": "Professeur",
+      "screen": "Écran",
+      "canvas": "Toile",
+      "stage": "Scène"
+    }
+  },
   "leaderboard": {
     "pageTitle": "Classement",
     "pageDescription": "Tes parties sauvegardées",

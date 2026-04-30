@@ -1,84 +1,193 @@
 import { reactive, ref } from 'vue'
-import { JOKER_BASE_LIMITS, TIMER_EFFECTS } from '@/constants/gameConfig'
+import type {
+  GameMode,
+  JokersClassic,
+  JokersBeatClock,
+  JokersLongStreak,
+  JokersInvestigation,
+} from '@/types/game.types'
 import type { Movie } from '@/types/game.types'
 
-export function useJokers() {
-  const jokers = reactive({ ...JOKER_BASE_LIMITS })
+// ------------------------------
+// Classic Joker Logic (REACTIVE ✅)
+// ------------------------------
+export function useJokersClassic() {
+  const jokers = reactive<JokersClassic>({
+    revealLetterInitial: 3,
+    skipInitial: 2,
+    fiftyFiftyInitial: 2,
+    revealLetter: 3,
+    skip: 2,
+    fiftyFifty: 2,
+  })
 
-  const useSkip = (onNext: () => void) => {
-    if (jokers.skip <= 0) return
-    jokers.skip--
-    onNext()
+  const useRevealLetter = () => {
+    if (jokers.revealLetter > 0) jokers.revealLetter--
   }
 
-  const useAutoCorrect = (onCorrect: () => void) => {
-    if (jokers.skip <= 0) return
-    jokers.skip--
-    onCorrect()
+  const useAutoCorrect = (cb: () => void) => {
+    if (jokers.skip > 0) {
+      jokers.skip--
+      cb()
+    }
   }
 
   const useFiftyFifty = (currentMovie: Movie, movieList: Movie[]) => {
-    if (jokers.fiftyFifty <= 0 || movieList.length < 2) return null
+    if (jokers.fiftyFifty <= 0 || !movieList.length) return null
+
+    const correctTitle = currentMovie.title
+    let fakeTitle = correctTitle
+
+    while (fakeTitle === correctTitle) {
+      const randomIndex = Math.floor(Math.random() * movieList.length)
+      const randomMovie = movieList[randomIndex]
+      if (randomMovie) fakeTitle = randomMovie.title
+    }
+
     jokers.fiftyFifty--
-
-    const correct = currentMovie.title ?? 'Unknown Movie'
-    const validMovies = movieList.filter((m) => m && m.id !== currentMovie.id && m.title?.trim())
-    let fake = 'Wrong Answer'
-    const selected = validMovies[Math.floor(Math.random() * validMovies.length)]
-    if (selected?.title) fake = selected.title
-    return { correct, fake }
+    return { correct: correctTitle, fake: fakeTitle }
   }
 
-  const useStopTimer = (difficulty: string, stopTimerFor: (sec: number) => void) => {
+  return {
+    jokers,
+    useRevealLetter,
+    useAutoCorrect,
+    useFiftyFifty,
+  }
+}
+
+// ------------------------------
+// Beat The Clock (REACTIVE ✅)
+// ------------------------------
+export function useJokersBeatClock() {
+  const jokers = reactive<JokersBeatClock>({
+    skipInitial: 3,
+    stopTimerInitial: 2,
+    addTimeInitial: 2,
+    skip: 3,
+    stopTimer: 2,
+    addTime: 2,
+  })
+
+  const useSkip = () => {
+    if (jokers.skip > 0) jokers.skip--
+  }
+
+  const useStopTimer = (timer: any) => {
     if (jokers.stopTimer <= 0) return
-    const sec =
-      TIMER_EFFECTS.stopDuration[difficulty as keyof typeof TIMER_EFFECTS.stopDuration] || 3
+    timer.stopTimerFor(5)
     jokers.stopTimer--
-    stopTimerFor(sec)
   }
 
-  const useAddTime = (difficulty: string, addTime: (sec: number) => void) => {
-    if (jokers.addTime <= 0) return
-    const sec = TIMER_EFFECTS.addSeconds[difficulty as keyof typeof TIMER_EFFECTS.addSeconds] || 5
-    jokers.addTime--
-    addTime(sec)
+  const useAddTime = (timer: { addTime: (s: number) => void }) => {
+    if (jokers.addTime > 0) {
+      jokers.addTime--
+      timer.addTime(15)
+    }
   }
 
-  const resetJokers = () => {
-    Object.assign(jokers, { ...JOKER_BASE_LIMITS })
+  return {
+    jokers,
+    useSkip,
+    useStopTimer,
+    useAddTime,
   }
+}
 
-  // Protect streak
+// ------------------------------
+// Longest Streak (REACTIVE ✅)
+// ------------------------------
+export function useJokersLongStreak() {
+  const jokers = reactive<JokersLongStreak>({
+    skipInitial: 3,
+    protectStreakInitial: 2,
+    instantWinInitial: 1,
+    skip: 3,
+    protectStreak: 2,
+    instantWin: 1,
+  })
+
   const streakProtected = ref(false)
 
-  const useProtectStreak = () => {
-    if (jokers.protectStreak <= 0) return
-    jokers.protectStreak--
-    streakProtected.value = true
+  const useSkip = () => {
+    if (jokers.skip > 0) jokers.skip--
   }
 
-  // ✅ FIXED: Reset after use
+  const useProtectStreak = () => {
+    if (jokers.protectStreak > 0) {
+      jokers.protectStreak--
+      streakProtected.value = true
+    }
+  }
+
   const consumeStreakProtection = () => {
     streakProtected.value = false
   }
 
-  const useInstantWin = (onApply: () => void) => {
-    if (jokers.instantWin <= 0) return
-    jokers.instantWin--
-    onApply()
+  const useInstantWin = (cb: () => void) => {
+    if (jokers.instantWin > 0) {
+      jokers.instantWin--
+      cb()
+    }
   }
 
   return {
     jokers,
     streakProtected,
     useSkip,
-    useAutoCorrect,
-    useFiftyFifty,
-    useStopTimer,
-    useAddTime,
     useProtectStreak,
-    consumeStreakProtection, // ✅ NEW
+    consumeStreakProtection,
     useInstantWin,
-    resetJokers,
+  }
+}
+
+// ------------------------------
+// Investigation (REACTIVE ✅)
+// ------------------------------
+export function useJokersInvestigation() {
+  const jokers = reactive<JokersInvestigation>({
+    hintInitial: 2,
+    removeTwoInitial: 2,
+    skipQuestionInitial: 2,
+    hint: 2,
+    removeTwo: 2,
+    skipQuestion: 2,
+  })
+
+  const useHint = () => {
+    if (jokers.hint > 0) jokers.hint--
+  }
+
+  const useRemoveTwo = () => {
+    if (jokers.removeTwo > 0) jokers.removeTwo--
+  }
+
+  const useSkipQuestion = (): boolean => {
+    if (jokers.skipQuestion <= 0) return false
+    jokers.skipQuestion--
+    return true
+  }
+
+  return {
+    jokers,
+    useHint,
+    useRemoveTwo,
+    useSkipQuestion,
+  }
+}
+
+// Factory
+export function createJokerSet(mode: GameMode) {
+  switch (mode) {
+    case 'classic':
+      return useJokersClassic()
+    case 'beat-the-clock':
+      return useJokersBeatClock()
+    case 'longest-streak':
+      return useJokersLongStreak()
+    case 'investigation':
+      return useJokersInvestigation()
+    default:
+      throw new Error(`Unsupported mode: ${mode}`)
   }
 }
